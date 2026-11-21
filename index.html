@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>香港三天兩夜 · 旅行手帳</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+:root{--navy:#23406B;--red:#D9482F;--yel:#F2B441;--pink:#E58FA6;--green:#2F7D6B;--sky:#7FB9D6;--bg:#EEF4F3;--card:#fff;--ink:#1d2a3d;--sightbg:#E3F1F8;--foodbg:#FDF1D4;--shopbg:#FBE4EA;--plainbg:#F4F5F6;--mut:#5b6b80}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13211f;--card:#1c2b3a;--ink:#e8eef5;--sightbg:#1f3a4a;--foodbg:#4a3d1a;--shopbg:#4a2a35;--plainbg:#26333f;--mut:#a9b8c8;--navy:#8fb3e8}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "Noto Sans TC",system-ui,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+main{max-width:640px;margin:0 auto;padding:12px}
+.card{background:var(--card);border:1.5px solid var(--navy);border-radius:16px;padding:14px;margin:0 0 12px}
+h1{margin:6px 0 2px;font-size:24px;color:var(--navy)}h2{font-size:19px;margin:0 0 8px;color:var(--navy)}h3{font-size:17px;margin:0}
+.sub{color:var(--mut);margin:0 0 8px}
+.tag{display:inline-block;font-size:13px;padding:0 8px;border-radius:99px;margin-left:6px;border:1px solid currentColor;vertical-align:middle;line-height:1.6}
+.tbc{color:var(--red)}.eg{color:var(--green)}.must{background:var(--red);color:#fff;border-color:var(--red)}
+nav.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px}
+nav.tabs button{min-height:64px;border-radius:16px;border:1.5px solid var(--navy);background:var(--card);color:var(--ink);font:inherit;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}
+nav.tabs button[aria-selected=true]{background:#23406B;color:#fff}
+button{font-family:inherit}
+svg.hero{width:100%;height:auto;display:block;border-radius:12px;border:1.5px solid var(--navy)}
+.big{font-size:34px;font-weight:700;color:var(--red)}
+.pass{display:flex;border:1.5px dashed var(--navy);border-radius:14px;overflow:hidden;margin:8px 0;background:var(--card)}
+.pass .l{flex:1;padding:10px}.pass .r{background:var(--navy);color:#fff;padding:10px;text-align:center;min-width:76px;display:flex;flex-direction:column;justify-content:center}
+.route{font-size:22px;font-weight:700}
+.days{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.days button{border:1.5px solid var(--navy);background:var(--card);color:var(--ink);border-radius:14px;padding:8px 4px;min-height:64px;font-size:15px;cursor:pointer}
+.days button[aria-pressed=true]{background:#23406B;color:#fff}
+.sum{position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.sum a,.maplink{color:var(--navy);font-weight:700}
+.seg{display:flex;gap:8px;margin:0 0 12px}
+.seg button{flex:1;min-height:44px;border-radius:12px;border:1.5px solid var(--navy);background:var(--card);color:var(--ink);font-size:16px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--yel);color:#1d2a3d;font-weight:700}
+.it{border:1.5px solid var(--navy);border-radius:16px;padding:12px;margin:0;animation:pop .35s both}
+.it.sight{background:var(--sightbg)}.it.food{background:var(--foodbg)}.it.shop{background:var(--shopbg)}.it.plain{background:var(--plainbg)}
+.it.done h3{text-decoration:line-through;opacity:.6}
+.top{display:flex;gap:10px;align-items:flex-start}
+.top input{width:26px;height:26px;margin-top:2px;flex:none}
+.tr{margin:6px 0 6px 18px;padding:6px 10px;border-left:3px dotted var(--navy);color:var(--mut);font-size:15px}
+.row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.row input,.add input{font:inherit;border:1.5px solid var(--navy);border-radius:10px;padding:8px;background:var(--card);color:var(--ink);min-width:0;flex:1}
+.btn{min-height:44px;border:1.5px solid var(--navy);background:var(--card);color:var(--ink);border-radius:12px;padding:0 14px;font-size:16px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.btn.pri{background:#23406B;color:#fff}
+.back{width:100%;margin-top:6px;justify-content:center;min-height:56px}
+.prog{height:12px;border:1.5px solid var(--navy);border-radius:99px;overflow:hidden}.prog i{display:block;height:100%;background:var(--green);width:0;transition:width .3s}
+.ck{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(35,64,107,.2)}
+.ck input{width:24px;height:24px;flex:none}.ck span{flex:1}.ck button{border:0;background:none;font-size:20px;color:var(--red);min-width:44px;min-height:44px;cursor:pointer}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px}dt{color:var(--mut)}dd{margin:0}
+.blank{border-bottom:1.5px dashed var(--mut);display:inline-block;min-width:120px}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.98)}60%{transform:translateY(-2px)}to{opacity:1;transform:none}}
+@keyframes tw{50%{opacity:.35}}@keyframes drift{to{transform:translateX(380px)}}@keyframes wv{50%{transform:translateX(8px)}}
+.tw{animation:tw 2.4s infinite}.tram{animation:drift 22s linear infinite}.wv{animation:wv 4s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+[hidden]{display:none!important}
+</style></head><body><main>
+<header class="card" style="padding:10px">
+<svg class="hero" viewBox="0 0 400 190" role="img" aria-label="維港天際線、叮叮電車與城堡剪影（原創插畫）">
+<rect width="400" height="190" fill="#7FB9D6"/><circle cx="330" cy="40" r="18" fill="#F2B441"/>
+<g fill="#23406B"><rect x="20" y="70" width="26" height="70"/><rect x="50" y="48" width="22" height="92"/><rect x="76" y="82" width="30" height="58"/><rect x="110" y="40" width="20" height="100"/><rect x="134" y="64" width="28" height="76"/><path d="M262 140v-34h10v-14l8-12 8 12v14h10v34zM300 140v-24h8v-10l6-9 6 9v10h8v24z"/></g>
+<g fill="#F2B441" class="tw"><rect x="56" y="58" width="4" height="4"/><rect x="116" y="52" width="4" height="4"/><rect x="82" y="94" width="4" height="4"/><rect x="140" y="76" width="4" height="4"/></g>
+<text x="170" y="100" font-size="15" font-weight="700" fill="#D9482F" class="tw" font-family="sans-serif">茶餐廳</text>
+<g fill="#E58FA6" class="tw"><path d="M345 100l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z"/></g>
+<rect y="140" width="400" height="50" fill="#23406B"/>
+<g class="wv" stroke="#7FB9D6" stroke-width="2" fill="none"><path d="M10 160q20-8 40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0"/><path d="M0 176q20-8 40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0"/></g>
+<g class="tram"><g transform="translate(-120 118)"><rect width="52" height="26" rx="4" fill="#D9482F"/><rect x="4" y="4" width="10" height="8" fill="#EEF4F3"/><rect x="19" y="4" width="10" height="8" fill="#EEF4F3"/><rect x="34" y="4" width="10" height="8" fill="#EEF4F3"/><circle cx="12" cy="28" r="4" fill="#1d2a3d"/><circle cx="40" cy="28" r="4" fill="#1d2a3d"/></g></g>
+</svg>
+<h1>香港三天兩夜 · 迪士尼自由行</h1>
+<p class="sub">2026/12/8（二）– 12/10（四）<span class="tag tbc">日期依截圖，待確認</span></p>
+</header>
+<nav class="tabs" id="tabs" role="tablist"></nav>
+
+<section id="p-over">
+<div class="card" id="count" style="text-align:center"></div>
+<h2>航班</h2><p class="sub">台灣與香港同為 UTC+8，無時差。</p>
+<div id="flights"></div>
+<div class="card"><h3>貨幣與交通</h3><p style="margin:4px 0 0">港幣（HKD）；八達通（Octopus）可搭港鐵、巴士、電車，也可小額購物。</p></div>
+<button class="btn back" data-go="menu">↑ 回主選單</button>
+</section>
+
+<section id="p-days" hidden>
+<div class="days" id="daybtns"></div>
+<div class="card sum" id="sum"></div>
+<div class="seg"><button id="sunny" aria-pressed="true">☀️ 晴天行程</button><button id="rainy" aria-pressed="false">🌧 雨天替代<span class="tag eg">範例</span></button></div>
+<div id="tl"></div>
+<div class="card"><h2>今日花費</h2>
+<div class="row" style="margin:0 0 8px"><input id="amt" type="number" inputmode="decimal" placeholder="HK$ 金額"><input id="memo" placeholder="項目"><button class="btn pri" id="addx">新增</button></div>
+<div class="row" style="margin:0 0 8px;align-items:center"><span>匯率 HK$1 = NT$</span><input id="rate" type="number" step="0.01" value="4.0" style="max-width:90px;flex:none"></div>
+<div id="xl"></div><p style="margin:8px 0 0;font-weight:700" id="xt"></p></div>
+<button class="btn back" data-go="menu">↑ 回主選單</button>
+</section>
+
+<section id="p-list" hidden>
+<div class="card"><h2>準備進度</h2><div class="prog"><i id="pbar"></i></div><p class="sub" id="ptxt" style="margin:6px 0 0"></p></div>
+<div id="lists"></div>
+<button class="btn back" data-go="menu">↑ 回主選單</button>
+</section>
+
+<section id="p-stay" hidden>
+<div class="card"><h2>住宿速查</h2><dl>
+<dt>名稱</dt><dd>迪士尼探索家度假酒店<br>Disney Explorers Lodge</dd>
+<dt>地址</dt><dd><span class="blank"></span></dd>
+<dt>最近車站</dt><dd>迪士尼站（港鐵迪士尼線）<span class="tag tbc">步行時間待確認</span></dd>
+<dt>入住／退房</dt><dd>待確認</dd>
+<dt>訂房編號</dt><dd><span class="blank"></span></dd></dl>
+<div class="row"><a class="btn pri" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Disney+Explorers+Lodge+Hong+Kong">🗺 開啟地圖</a></div></div>
+<div class="card"><h2>伴手禮與購物<span class="tag eg">範例</span></h2><ul style="margin:0;padding-left:20px"><li>中環：茶葉、手工餅乾、烘焙點心</li><li>荃灣、大角咀：社區老店與咖啡豆</li><li>迪士尼園內商店：周邊商品，價格依現場為準</li></ul><p class="sub">退稅：香港為自由港，一般商品不課銷售稅，無退稅。</p></div>
+<div class="card"><h2>旅遊資訊速查</h2><dl>
+<dt>報警／緊急</dt><dd><a class="maplink" href="tel:999">999</a></dd>
+<dt>駐港辦事處</dt><dd>中華經貿協會 <span class="blank"></span></dd>
+<dt>保險資料</dt><dd><span class="blank"></span></dd>
+<dt>餐廳訂位編號</dt><dd><span class="blank"></span></dd></dl></div>
+<div class="card"><h2>預算<span class="tag eg">範例</span></h2><p class="sub">每人估算，不含機票，請自行填寫。</p><dl><dt>交通</dt><dd>HK$ ____</dd><dt>住宿</dt><dd>HK$ ____</dd><dt>門票</dt><dd>HK$ ____</dd><dt>餐費</dt><dd>HK$ ____</dd></dl><p style="margin:8px 0 0;font-weight:700" id="spent"></p></div>
+<button class="btn back" data-go="menu">↑ 回主選單</button>
+</section>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const TABS=[["over","🏠","總覽"],["days","🗓","每日行程"],["list","✅","行前清單"],["stay","🏨","住宿速查"]];
+const DAYS=[
+{d:"12/8",w:"二",t:"機場 → 中上環 → 迪士尼",hi:20,lo:16,rain:"10%",
+ it:[{k:"plain",n:"抵達香港國際機場",tbc:1,q:"Hong Kong International Airport"},
+ {tr:"港鐵機場快線 → 市區（截圖顯示約 34 分，轉乘細節待確認）"},
+ {k:"food",n:"Bakehouse（中環／上環）",d:"烘焙與甜點店，店址、營業時間待確認。",food:"烘焙／甜點",bud:"待確認",tbc:1,q:"Bakehouse Hong Kong"},
+ {tr:"步行（分鐘數待確認）"},
+ {k:"food",n:"義式冰淇淋與飲品店",d:"截圖看不清店名，待確認。",food:"冰淇淋／飲品",bud:"待確認",tbc:1,q:"gelato Sheung Wan Hong Kong"},
+ {tr:"港鐵 中環／上環 → 欣澳 → 轉迪士尼線 → 迪士尼站（詳細時間待確認）"},
+ {k:"plain",n:"入住 Disney Explorers Lodge、放行李",tbc:1,q:"Disney Explorers Lodge"}],
+ alt:["中上環下雨：改在商場或室內咖啡店停留","店家排隊過長時，直接提早前往酒店休息"]},
+{d:"12/9",w:"三",t:"迪士尼樂園",hi:20,lo:16,rain:"10%",
+ it:[{k:"sight",n:"香港迪士尼樂園",d:"全日行程，開園與閉園時間、遊樂設施與表演待確認。",stay:"全天",must:1,tbc:1,q:"Hong Kong Disneyland"},
+ {k:"food",n:"園內用餐",d:"餐廳與是否訂位待確認。",food:"園區餐飲",bud:"待確認",tbc:1,q:"Hong Kong Disneyland restaurants"},
+ {k:"plain",n:"酒店入園優惠／提前入園資格",d:"如有，請在此填寫：＿＿＿＿"}],
+ alt:["下雨：多安排室內表演與室內餐廳","備好雨衣，戶外設施依現場公告為準"]},
+{d:"12/10",w:"四",t:"荃灣・大角咀 → 返程",hi:19,lo:15,rain:"10%",
+ it:[{k:"plain",n:"退房",tbc:1,q:"Disney Explorers Lodge"},
+ {tr:"港鐵 迪士尼 → 欣澳 → 東涌線／荃灣線 → 荃灣（詳細時間待確認）"},
+ {k:"sight",n:"荃灣",d:"景點與咖啡店待確認。",stay:"待確認",tbc:1,q:"Tsuen Wan"},
+ {tr:"港鐵荃灣線 荃灣 → 大角咀（約 20 分，待確認）"},
+ {k:"food",n:"大角咀咖啡與美食",d:"店名待確認。",food:"待確認",bud:"待確認",tbc:1,q:"Tai Kok Tsui"},
+ {tr:"港鐵 → 機場快線 → 機場（請預留充足緩衝）"},
+ {k:"plain",n:"返程：香港國際機場",d:"起飛時間待確認。",tbc:1,q:"Hong Kong International Airport"}],
+ alt:["下雨：荃灣改逛室內商場","大角咀以咖啡店為主，縮短戶外行程"]}];
+const CL={"行前待辦":["確認護照效期與入境規定","購買迪士尼門票並確認入園日期","預訂機場快線或準備八達通","eSIM 或漫遊","兌換港幣"],"行李準備":["護照","充電器","行動電源","薄外套","雨具"],"餐廳與訂位":["中上環咖啡店與甜點店（確認營業時間與排隊）","迪士尼園內餐廳（視需要訂位）","12/10 荃灣、大角咀用餐（待確認）"]};
+let day=0,rain=false,done=store.get("done",{}),list=store.get("list",null)||Object.fromEntries(Object.entries(CL).map(([k,v])=>[k,v.map(t=>({t,c:0}))])),ex=store.get("ex",[]);
+const tag=(t,c)=>`<span class="tag ${c}">${t}</span>`;
+const maps=q=>`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+function show(id){["over","days","list","stay"].forEach(x=>$("#p-"+x).hidden=x!==id);document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===id));if(id==="stay")spent()}
+$("#tabs").innerHTML=TABS.map(t=>`<button role="tab" data-t="${t[0]}">${t[1]} ${t[2]}</button>`).join("");
+$("#tabs").onclick=e=>{const b=e.target.closest("button");if(b)show(b.dataset.t)};
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{show("over");scrollTo({top:0})});
+function count(){const s=new Date(2026,11,8),n=new Date(),t=new Date(n.getFullYear(),n.getMonth(),n.getDate()),df=Math.round((s-t)/864e5);
+ $("#count").innerHTML=df>0?`<div class="sub">距離出發還有</div><div class="big">${df} 天</div>`:df>-3?`<div class="sub">旅行進行中</div><div class="big">第 ${1-df} 天</div><div>${DAYS[-df].t}</div>`:`<div class="big">旅程結束</div>`}
+function flights(){const f=(t,a,b,d)=>`<div class="pass"><div class="l"><div class="sub" style="margin:0">${t}<span class="tag eg">範例</span></div><div class="route">${a} → ${b}</div><div>${d}</div><div class="sub" style="margin:0">航空公司／航班：範例　航廈：待確認　飛行約 1 時 50 分</div></div><div class="r"><b>登機證</b><span>BOARDING</span></div></div>`;
+ $("#flights").innerHTML=f("去程 12/8","TPE","HKG","起飛 範例 ＿＿:＿＿ → 抵達 ＿＿:＿＿")+f("回程 12/10","HKG","TPE","起飛 待確認 → 抵達 待確認")}
+function days(){$("#daybtns").innerHTML=DAYS.map((x,i)=>`<button data-i="${i}" aria-pressed="${i===day}"><b>${x.d}（${x.w}）</b><br>第 ${i+1} 天</button>`).join("");
+ const x=DAYS[day];$("#sum").innerHTML=`<div>☁️ 約 ${x.lo}–${x.hi}°C　降雨機率 ${x.rain}${tag("範例","eg")}</div><div class="sub" style="margin:0">洋蔥式穿搭，室內冷氣偏冷。</div><div>🏨 迪士尼探索家度假酒店・迪士尼站　<a href="${maps("Disney Explorers Lodge Hong Kong")}" target="_blank" rel="noopener">地圖</a></div>`;
+ if(rain){$("#tl").innerHTML=`<div class="card"><h3>雨天備案${tag("範例","eg")}</h3><ul style="margin:8px 0 0;padding-left:20px">${x.alt.map(a=>`<li>${a}</li>`).join("")}</ul></div>`;return}
+ let n=0;$("#tl").innerHTML=x.it.map((o,j)=>{if(o.tr)return`<div class="tr">🚇 ${o.tr}</div>`;const id=`${day}-${j}`,dl=n++*70;
+ return`<div class="it ${o.k}${done[id]?" done":""}" style="animation-delay:${dl}ms"><div class="top"><input type="checkbox" data-id="${id}" ${done[id]?"checked":""} aria-label="完成"><div style="flex:1"><h3>${o.n}${o.must?tag("必去","must"):""}${o.tbc?tag("待確認","tbc"):""}</h3>${o.d?`<div>${o.d}</div>`:""}${o.stay?`<div class="sub" style="margin:0">預計停留：${o.stay}</div>`:""}${o.food?`<div class="sub" style="margin:0">${o.food}・預算 ${o.bud}・訂位：視情況</div>`:""}${o.q?`<a class="maplink" target="_blank" rel="noopener" href="${maps(o.q)}">🗺 查看地圖</a>`:""}</div></div></div>`}).join("")}
+$("#daybtns").onclick=e=>{const b=e.target.closest("button");if(b){day=+b.dataset.i;days();xp()}};
+$("#sunny").onclick=()=>{rain=false;$("#sunny").setAttribute("aria-pressed",true);$("#rainy").setAttribute("aria-pressed",false);days()};
+$("#rainy").onclick=()=>{rain=true;$("#rainy").setAttribute("aria-pressed",true);$("#sunny").setAttribute("aria-pressed",false);days()};
+$("#tl").onchange=e=>{const i=e.target.dataset.id;if(i){done[i]=e.target.checked;store.set("done",done);e.target.closest(".it").classList.toggle("done",e.target.checked)}};
+function xp(){const r=+$("#rate").value||0,l=ex.filter(e=>e.d===day);$("#xl").innerHTML=l.map(e=>`<div class="ck"><span>${e.m||"花費"}：HK$${e.a}（約 NT$${Math.round(e.a*r)}）</span><button data-x="${ex.indexOf(e)}" aria-label="刪除">✕</button></div>`).join("");const s=l.reduce((a,e)=>a+e.a,0);$("#xt").textContent=`今日合計 HK$${s}（約 NT$${Math.round(s*r)}）`}
+$("#addx").onclick=()=>{const a=parseFloat($("#amt").value);if(!a)return;ex.push({d:day,a,m:$("#memo").value});store.set("ex",ex);$("#amt").value="";$("#memo").value="";xp()};
+$("#xl").onclick=e=>{const b=e.target.closest("button");if(b){ex.splice(+b.dataset.x,1);store.set("ex",ex);xp()}};
+$("#rate").oninput=()=>{xp();spent()};
+function spent(){const r=+$("#rate").value||0,s=ex.reduce((a,e)=>a+e.a,0);$("#spent").textContent=`三天已記帳 HK$${s}（約 NT$${Math.round(s*r)}）`}
+function lists(){let tot=0,ok=0;$("#lists").innerHTML=Object.entries(list).map(([k,v])=>{v.forEach(i=>{tot++;ok+=i.c});return`<div class="card"><h2>${k}</h2>${v.map((i,j)=>`<div class="ck"><input type="checkbox" data-k="${k}" data-j="${j}" ${i.c?"checked":""}><span>${i.t}</span><button data-k="${k}" data-r="${j}" aria-label="移除">✕</button></div>`).join("")}<div class="row add"><input data-n="${k}" placeholder="新增項目"><button class="btn" data-a="${k}">新增</button></div></div>`}).join("");
+ $("#pbar").style.width=(tot?ok/tot*100:0)+"%";$("#ptxt").textContent=`已完成 ${ok} / ${tot} 項`}
+$("#lists").onclick=e=>{const b=e.target.closest("button"),c=e.target;if(c.dataset.j!==undefined){list[c.dataset.k][c.dataset.j].c=c.checked?1:0}else if(b&&b.dataset.r!==undefined){list[b.dataset.k].splice(+b.dataset.r,1)}else if(b&&b.dataset.a){const i=document.querySelector(`[data-n="${b.dataset.a}"]`);if(!i.value.trim())return;list[b.dataset.a].push({t:i.value.trim(),c:0})}else return;store.set("list",list);lists()};
+count();flights();days();xp();lists();show("over");
+</script></body></html>
