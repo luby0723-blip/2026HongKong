@@ -120,7 +120,7 @@ const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v)
 const TABS=[["over","🏠","總覽"],["days","🗓","每日行程"],["list","✅","行前清單"],["stay","🏨","住宿速查"]];
 const DAYS=[
 {d:"12/8",w:"二",t:"機場 → 中上環 → 迪士尼",hi:20,lo:16,rain:"10%",
- it:[{k:"plain",n:"抵達香港國際機場",tbc:1,q:"Hong Kong International Airport"},
+ it:[{k:"plain",n:"抵達香港國際機場",d:"長榮 BR845，10:55 抵達；入境、領行李後前往機場快線。",q:"Hong Kong International Airport"},
  {tr:"港鐵機場快線 → 市區（截圖顯示約 34 分，轉乘細節待確認）"},
  {k:"food",n:"Bakehouse（中環／上環）",d:"烘焙與甜點店，店址、營業時間待確認。",food:"烘焙／甜點",bud:"待確認",tbc:1,q:"Bakehouse Hong Kong"},
  {tr:"步行（分鐘數待確認）"},
@@ -140,7 +140,7 @@ const DAYS=[
  {tr:"港鐵荃灣線 荃灣 → 大角咀（約 20 分，待確認）"},
  {k:"food",n:"大角咀咖啡與美食",d:"店名待確認。",food:"待確認",bud:"待確認",tbc:1,q:"Tai Kok Tsui"},
  {tr:"港鐵 → 機場快線 → 機場（請預留充足緩衝）"},
- {k:"plain",n:"返程：香港國際機場",d:"起飛時間待確認。",tbc:1,q:"Hong Kong International Airport"}],
+ {k:"plain",n:"返程：香港國際機場",d:"長榮 BR850，19:30 起飛；建議 16:30 前抵達機場辦理登機（建議值）。",q:"Hong Kong International Airport"}],
  alt:["下雨：荃灣改逛室內商場","大角咀以咖啡店為主，縮短戶外行程"]}];
 const CL={"行前待辦":["確認護照效期與入境規定","購買迪士尼門票並確認入園日期","預訂機場快線或準備八達通","eSIM 或漫遊","兌換港幣"],"行李準備":["護照","充電器","行動電源","薄外套","雨具"],"餐廳與訂位":["中上環咖啡店與甜點店（確認營業時間與排隊）","迪士尼園內餐廳（視需要訂位）","12/10 荃灣、大角咀用餐（待確認）"]};
 let day=0,rain=false,done=store.get("done",{}),list=store.get("list",null)||Object.fromEntries(Object.entries(CL).map(([k,v])=>[k,v.map(t=>({t,c:0}))])),ex=store.get("ex",[]);
@@ -152,8 +152,8 @@ $("#tabs").onclick=e=>{const b=e.target.closest("button");if(b)show(b.dataset.t)
 document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{show("over");scrollTo({top:0})});
 function count(){const s=new Date(2026,11,8),n=new Date(),t=new Date(n.getFullYear(),n.getMonth(),n.getDate()),df=Math.round((s-t)/864e5);
  $("#count").innerHTML=df>0?`<div class="sub">距離出發還有</div><div class="big">${df} 天</div>`:df>-3?`<div class="sub">旅行進行中</div><div class="big">第 ${1-df} 天</div><div>${DAYS[-df].t}</div>`:`<div class="big">旅程結束</div>`}
-function flights(){const f=(t,a,b,d)=>`<div class="pass"><div class="l"><div class="sub" style="margin:0">${t}<span class="tag eg">範例</span></div><div class="route">${a} → ${b}</div><div>${d}</div><div class="sub" style="margin:0">航空公司／航班：範例　航廈：待確認　飛行約 1 時 50 分</div></div><div class="r"><b>登機證</b><span>BOARDING</span></div></div>`;
- $("#flights").innerHTML=f("去程 12/8","TPE","HKG","起飛 範例 ＿＿:＿＿ → 抵達 ＿＿:＿＿")+f("回程 12/10","HKG","TPE","起飛 待確認 → 抵達 待確認")}
+function flights(){const f=(t,a,b,d,c,h)=>`<div class="pass"><div class="l"><div class="sub" style="margin:0">${t}</div><div class="route">${a} → ${b}</div><div>${d}</div><div class="sub" style="margin:0">${c}　航廈：待確認　飛行約 ${h}</div></div><div class="r"><b>登機證</b><span>BOARDING</span></div></div>`;
+ $("#flights").innerHTML=f("去程 12/8（二）","KHH","HKG","09:15 高雄 → 10:55 香港","長榮 BR845","1 時 40 分")+f("回程 12/10（四）","HKG","KHH","19:30 香港 → 21:05 高雄","長榮 BR850","1 時 35 分")}
 function days(){$("#daybtns").innerHTML=DAYS.map((x,i)=>`<button data-i="${i}" aria-pressed="${i===day}"><b>${x.d}（${x.w}）</b><br>第 ${i+1} 天</button>`).join("");
  const x=DAYS[day];$("#sum").innerHTML=`<div>☁️ 約 ${x.lo}–${x.hi}°C　降雨機率 ${x.rain}${tag("範例","eg")}</div><div class="sub" style="margin:0">洋蔥式穿搭，室內冷氣偏冷。</div><div>🏨 迪士尼探索家度假酒店・迪士尼站　<a href="${maps("Disney Explorers Lodge Hong Kong")}" target="_blank" rel="noopener">地圖</a></div>`;
  if(rain){$("#tl").innerHTML=`<div class="card"><h3>雨天備案${tag("範例","eg")}</h3><ul style="margin:8px 0 0;padding-left:20px">${x.alt.map(a=>`<li>${a}</li>`).join("")}</ul></div>`;return}
