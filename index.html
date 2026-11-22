@@ -56,6 +56,7 @@ dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px}dt{color:va
 @keyframes fw{0%{opacity:0;transform:scale(.4)}35%{opacity:1}100%{opacity:0;transform:scale(1.2)}}@keyframes fly{to{transform:translateX(460px)}}
 .fw{transform-box:fill-box;transform-origin:center;animation:fw 4s ease-out infinite}.fly{animation:fly 30s linear infinite}.ferry{animation:fly 48s linear infinite}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.info{margin-top:8px;border-top:1px dashed var(--navy);padding-top:6px}.info summary{cursor:pointer;font-weight:700;color:var(--navy);min-height:32px}.info p{margin:6px 0}
 [hidden]{display:none!important}
 </style></head><body><main>
 <header class="card" style="padding:10px">
@@ -87,6 +88,7 @@ dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px}dt{color:va
 <h2>航班（依時刻表即時計算）</h2>
 <div id="flights"></div>
 <p class="sub">倒數與狀態依時刻表計算，不含延誤。出發當天請以下方連結查看實際動態。</p>
+<div class="card"><h2>實用小提醒</h2><ul style="margin:0;padding-left:20px"><li>香港電壓 220V，插座是英式三腳，台灣兩腳插頭要帶轉接頭。</li><li>八達通可搭港鐵、巴士、電車，也能在便利商店付款。</li><li>港鐵車廂內禁止飲食；手扶梯靠右站，左邊讓人通行。</li><li>香港車輛靠左行駛，過馬路先看右邊也要看左邊。</li><li>餐廳帳單常已含 10% 服務費，付款前看一下明細。</li><li>12 月氣溫涼爽，室內冷氣偏強，洋蔥式穿搭最方便。</li></ul></div>
 <button class="btn back" data-go="menu">↑ 回主選單</button>
 </section>
 
@@ -183,7 +185,7 @@ function days(){$("#daybtns").innerHTML=DAYS.map((x,i)=>`<button data-i="${i}" a
  const x=DAYS[day];$("#sum").innerHTML=`<div><b>${x.t}</b></div><div id="wx">${wxh()}</div><div class="sub" style="margin:0">洋蔥式穿搭，室內冷氣偏冷。</div>`;
 
  $("#tl").innerHTML=x.it.map((o,j)=>{const id=`${day}-${j}`,last=j===x.it.length-1;
- return`<div class="it ${o.k}${done[id]?" done":""}" style="animation-delay:${j*60}ms"><div class="top"><input type="checkbox" data-id="${id}" ${done[id]?"checked":""} aria-label="完成"><div style="flex:1"><div class="time">${o.t}${o.m?tag("必去","must"):""}</div><h3>${o.n}</h3>${o.h?`<div class="sub" style="margin:0">營業：${o.h}${o.w?tag("營業時間與行程時段不符，出發前再確認","warn"):""}</div>`:""}${o.d.length?`<ul>${o.d.map(d=>`<li>${d}</li>`).join("")}</ul>`:""}<a class="ml" target="_blank" rel="noopener" href="${maps(o.q)}">🗺 查看地圖</a></div></div></div>${o.tr&&!last?`<div class="tr">🚇 ${o.tr}</div>`:last?"":`<div style="height:12px"></div>`}`}).join("")}
+ return`<div class="it ${o.k}${done[id]?" done":""}" style="animation-delay:${j*60}ms"><div class="top"><input type="checkbox" data-id="${id}" ${done[id]?"checked":""} aria-label="完成"><div style="flex:1"><div class="time">${o.t}${o.m?tag("必去","must"):""}</div><h3>${o.n}</h3>${o.h?`<div class="sub" style="margin:0">營業：${o.h}${o.w?tag("營業時間與行程時段不符，出發前再確認","warn"):""}</div>`:""}${o.d.length?`<ul>${o.d.map(d=>`<li>${d}</li>`).join("")}</ul>`:""}${info(o)}<a class="ml" target="_blank" rel="noopener" href="${maps(o.q)}">🗺 查看地圖</a></div></div></div>${o.tr&&!last?`<div class="tr">🚇 ${o.tr}</div>`:last?"":`<div style="height:12px"></div>`}`}).join("")}
 $("#daybtns").onclick=e=>{const b=e.target.closest("button");if(b){day=+b.dataset.i;days()}};
 
 
@@ -196,6 +198,29 @@ $("#tl").onchange=e=>{const i=e.target.dataset.id;if(i){done[i]=e.target.checked
 function lists(){let tot=0,ok=0;$("#lists").innerHTML=Object.entries(list).map(([k,v])=>{v.forEach(i=>{tot++;ok+=i.c});return`<div class="card"><h2>${k}</h2>${v.map((i,j)=>`<div class="ck"><input type="checkbox" data-k="${k}" data-j="${j}" ${i.c?"checked":""}><span>${i.t}</span><button data-k="${k}" data-r="${j}" aria-label="移除">✕</button></div>`).join("")}<div class="row"><input data-n="${k}" placeholder="新增項目"><button class="btn" data-a="${k}">新增</button></div></div>`}).join("");
  $("#pbar").style.width=(tot?ok/tot*100:0)+"%";$("#ptxt").textContent=`已完成 ${ok} / ${tot} 項`}
 $("#lists").onclick=e=>{const b=e.target.closest("button"),c=e.target;if(c.dataset.j!==undefined){list[c.dataset.k][c.dataset.j].c=c.checked?1:0}else if(b&&b.dataset.r!==undefined){list[b.dataset.k].splice(+b.dataset.r,1)}else if(b&&b.dataset.a){const i=document.querySelector(`[data-n="${b.dataset.a}"]`);if(!i.value.trim())return;list[b.dataset.a].push({t:i.value.trim(),c:0})}else return;store.set("list2",list);lists()};
+const INFO={
+"香港國際機場":{i:"位於大嶼山赤鱲角，機場快線可直達市區。",n:"入境後先到行李轉盤；回程建議起飛前 2–3 小時抵達，留足安檢與出境時間。"},
+"港鐵香港站":{i:"機場快線與東涌線的市區站，連著國際金融中心（IFC）商場。",n:"出站走道指標多，請跟著 B 出口方向；寄放行李後再出發，逛街比較輕鬆。"},
+"Kactus Koffee":{i:"韓國咖啡品牌，上環店在皇后大道西 27 號。媒體介紹的招牌是冰咖啡上放手打微鹹奶霜的 Kactus Coffee。",n:"據介紹上環店要先找位子，再到一樓櫃檯點餐；招牌只有冰飲，天冷時請先確認有沒有熱飲。人均約 HK$50–60。",r:"Kactus Coffee（冰、鹹奶霜）、抹茶雲朵飲品"},
+"兆成行":{n:"我沒查到這間店的可靠資料，請出發前在地圖上確認品項與營業狀況。行程標示營業到 17:30，要留意時間。"},
+"元創方 PMQ":{i:"由舊警察已婚宿舍活化而成的設計創意基地，有設計師小店、工作室與咖啡店。",n:"店家多半下午才開，你排的 15:30 剛好。翻頁鐘需提前六個月預訂，現場只能看看。",r:"逛設計師小店，挑小件伴手禮"},
+"Snack Baby Gelato & Drinks":{n:"12 月氣溫偏涼，你標註可去可不去；肚子不餓可直接跳過，節省時間給大館。"},
+"祥興記上海生煎包（中環）":{i:"中環的上海生煎包店，現煎、底部酥脆。",n:"內餡湯汁燙口，咬開前先小心；用餐時段可能排隊。",r:"招牌生煎包"},
+"蘭芳園（中環總店）":{i:"香港老字號茶餐廳，以「絲襪奶茶」聞名。",n:"營業到 18:00，你 17:40 到要趕時間；外帶可能要排隊。",r:"絲襪奶茶、豬扒包"},
+"大館":{i:"由前中區警署、域多利監獄與中央裁判司署活化而成的古蹟與藝術空間。",n:"你註記要留意收館時間（八點結束）；部分展覽和導覽依場次，現場再確認。",r:"逛古蹟建築與庭院，傍晚光線很好拍照"},
+"維多利亞港":{i:"兩岸高樓夜景是香港最具代表性的風景。",n:"夜晚海風涼，記得帶外套；ifc 四樓視野不理想的話，再走到碼頭邊看。這站之後要趕回香港站，注意 20:30 的時間。"},
+"迪士尼探索家度假酒店":{i:"迪士尼度假區內的探險主題酒店。",n:"退房時間 11:00；12/9 出門前記得帶房卡紙套或入住證明，才能走酒店賓客專用入口。"},
+"香港迪士尼樂園":{i:"位於大嶼山，園內有「奇妙夢想城堡」與多個主題園區，包含魔雪奇緣世界。",n:"開園、閉園時間、煙火與夜間表演是否上演，都以官方公告為準，請出發前查看。建議用官方 App 看排隊時間與表演場次。",r:"先排人氣設施，中午人多時改看表演或用餐；離園時避開煙火結束的人潮，因為還要回佐敦"},
+"逸東酒店":{i:"位於佐敦，鄰近廟街與油麻地一帶。",n:"12/10 退房時間是 12:00；可先寄放行李，14:30 再回來拿。"},
+"逸東酒店拿行李":{n:"取行李後搭車去機場，行程標示約 52 分鐘；BR850 19:30 起飛，抵達時間要預留緩衝。"},
+"麥文記麵家":{i:"老字號雲吞麵店，以鮮蝦雲吞麵聞名。",n:"營業到 00:30，適合宵夜；碗小份量少，可加點一碗。",r:"鮮蝦雲吞麵"},
+"金華冰廳":{i:"旺角老牌冰室，以菠蘿油和奶茶聞名。",n:"座位不大，尖峰時段可能拼桌或排隊。",r:"菠蘿油、奶茶"},
+"REstore、黑地":{i:"REstore 位於旺角上海街 618 號（戰前唐樓活化群），據 2020 年報導，賣香港傳統手工藝與再創作商品，例如小巴膠牌、麻雀裝飾、刺繡絲質拖鞋。",n:"營業 12:00 起，你 10:45 到會早到；「黑地」我沒查到資料，請在地圖上確認。",r:"挑有香港特色的小物當伴手禮"},
+"倫敦大酒樓":{i:"旺角老牌酒樓，主打推車點心。",n:"行程標示營業 07:30–10:00，和你排的 11:40 不符，出發前請再確認。",r:"推車點心，二樓氣氛最熱鬧"},
+"曲奇四重奏（旺角店）":{i:"港式曲奇名店，四種口味混裝的曲奇鐵盒是常見伴手禮。",n:"熱門時段可能排隊；買完直接帶上飛機，別壓在行李底部。",r:"曲奇鐵盒伴手禮"},
+"Hashtag B":{n:"我沒查到這間店的可靠資料，請出發前在地圖上確認營業與品項。"},
+"富莉餐飲用品公司":{i:"餐飲用品店，你想買的是黑白淡奶杯。",n:"營業到 18:30，到店先確認有沒有貨；杯子易碎，建議手提並用衣物包好。"}};
+const info=o=>{const x=INFO[o.n];if(!x)return"";return`<details class="info"><summary>介紹・注意・推薦</summary>${x.i?`<p>📖 ${x.i}</p>`:""}${x.n?`<p>⚠️ ${x.n}</p>`:""}${x.r?`<p>👍 ${x.r}</p>`:""}</details>`};
 let W=null;
 const WI=c=>c===0?"☀️":c<=3?"⛅":c<=48?"🌫":c<=82?"🌧":"⛈";
 function wxh(){const x=DAYS[day],w=W&&W[day];return w?`${WI(w.c)} ${w.lo}–${w.hi}°C｜降雨機率 ${w.p==null?"—":w.p+"%"}<span class="tag eg">即時預報</span>`:`☁️ 12 月氣候平均約 ${x.lo}–${x.hi}°C，偏乾燥<span class="tag eg">氣候平均</span>`}
