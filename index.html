@@ -56,6 +56,16 @@ dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px}dt{color:va
 @keyframes fw{0%{opacity:0;transform:scale(.4)}35%{opacity:1}100%{opacity:0;transform:scale(1.2)}}@keyframes fly{to{transform:translateX(460px)}}
 .fw{transform-box:fill-box;transform-origin:center;animation:fw 4s ease-out infinite}.fly{animation:fly 30s linear infinite}.ferry{animation:fly 48s linear infinite}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.ic{width:20px;height:20px;flex:none}
+nav.tabs button .ic{width:26px;height:26px}
+a.ml{display:inline-flex;align-items:center;gap:6px}
+.btn{gap:8px}
+.back{background:var(--sel);color:#fff;border-color:var(--sel)}
+.tr{display:flex;gap:8px;align-items:flex-start}.tr .ic{margin-top:3px;color:var(--navy)}
+.ip{display:flex;gap:8px}.ip .ic{margin-top:4px;color:var(--red)}
+.fld{font:inherit;border:1.5px solid var(--navy);border-radius:10px;padding:8px;background:var(--card);color:var(--ink);width:100%;min-width:0}
+.pay{margin-top:24px;background:#DDF1FC;border-color:#5BB3E6}.pay h2{color:#2A7DB5}.pay .btn{background:#89CFF0;border-color:#5BB3E6;color:#14344d}.tag.cat{color:var(--navy)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .pay{background:#1f3a4d;border-color:#7cc4ec}:root:not([data-theme=light]) .pay h2{color:#9fd8ff}}
 .info{margin-top:8px;border-top:1px dashed var(--navy);padding-top:6px}.info summary{cursor:pointer;font-weight:700;color:var(--navy);min-height:32px}.info p{margin:6px 0}
 [hidden]{display:none!important}
 </style></head><body><main>
@@ -88,7 +98,7 @@ dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px}dt{color:va
 <h2>航班（依時刻表即時計算）</h2>
 <div id="flights"></div>
 <p class="sub">倒數與狀態依時刻表計算，不含延誤。出發當天請以下方連結查看實際動態。</p>
-<div class="card"><h2>實用小提醒</h2><ul style="margin:0;padding-left:20px"><li>香港電壓 220V，插座是英式三腳，台灣兩腳插頭要帶轉接頭。</li><li>八達通可搭港鐵、巴士、電車，也能在便利商店付款。</li><li>港鐵車廂內禁止飲食；手扶梯靠右站，左邊讓人通行。</li><li>香港車輛靠左行駛，過馬路先看右邊也要看左邊。</li><li>餐廳帳單常已含 10% 服務費，付款前看一下明細。</li><li>12 月氣溫涼爽，室內冷氣偏強，洋蔥式穿搭最方便。</li></ul></div>
+<div class="card"><h2 style="display:flex;align-items:center;gap:8px"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg>實用小提醒</h2><ul style="margin:0;padding-left:20px"><li>香港電壓 220V，插座是英式三腳，台灣兩腳插頭要帶轉接頭。</li><li>八達通可搭港鐵、巴士、電車，也能在便利商店付款。</li><li>港鐵車廂內禁止飲食；手扶梯靠右站，左邊讓人通行。</li><li>香港車輛靠左行駛，過馬路先看右邊也要看左邊。</li><li>餐廳帳單常已含 10% 服務費，付款前看一下明細。</li><li>12 月氣溫涼爽，室內冷氣偏強，洋蔥式穿搭最方便。</li></ul></div>
 <button class="btn back" data-go="menu">↑ 回主選單</button>
 </section>
 
@@ -97,7 +107,7 @@ dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px}dt{color:va
 <div class="card sum" id="sum"></div>
 
 <div id="tl"></div>
-<div class="card"><h2>即時記帳・分帳</h2><p class="sub">使用 LINE 記帳工具，同行的人都能一起記帳與分帳。</p><a class="btn pri" target="_blank" rel="noopener" href="https://liff.line.me/1655320992-Y8GowEpw/g/fEBLuYspc11mNuuyUiPsjd">💰 開啟記帳</a></div>
+<div class="card pay"><h2>即時記帳・分帳</h2><p class="sub">使用 LINE 記帳工具，同行的人都能一起記帳與分帳。</p><a class="btn pri" target="_blank" rel="noopener" href="https://liff.line.me/1655320992-Y8GowEpw/g/fEBLuYspc11mNuuyUiPsjd"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9.5c0-1 1.2-1.7 3-1.7s3 .7 3 1.7-1.2 1.5-3 2-3 1-3 2 1.2 1.7 3 1.7 3-.7 3-1.7M12 6.5v1.3M12 16.2v1.3"/></svg> 開啟記帳</a></div>
 <button class="btn back" data-go="menu">↑ 回主選單</button>
 </section>
 
@@ -110,21 +120,23 @@ dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px}dt{color:va
 <section id="p-stay" hidden>
 <div class="card"><h2>12/8 住宿</h2><dl>
 <dt>名稱</dt><dd>迪士尼探索家度假酒店<br>Disney Explorers Lodge</dd>
+<dt>地址</dt><dd>香港大嶼山香港迪士尼樂園度假區<br><span class="sub">Hong Kong Disneyland Resort, Lantau Island</span></dd>
 <dt>退房</dt><dd>12/9 11:00</dd>
-<dt>地址</dt><dd><span class="blank"></span></dd>
-<dt>訂房編號</dt><dd><span class="blank"></span></dd></dl>
-<div class="row"><a class="btn pri" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Disney+Explorers+Lodge+Hong+Kong">🗺 開啟地圖</a></div></div>
+<dt>房號</dt><dd><input class="fld" data-f="room1" placeholder="填寫房號"></dd>
+<dt>訂房編號</dt><dd><input class="fld" data-f="bk1" placeholder="填寫訂房編號"></dd></dl>
+<div class="row"><a class="btn pri" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Disney+Explorers+Lodge+Hong+Kong"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> 開啟地圖</a></div></div>
 <div class="card"><h2>12/9 住宿</h2><dl>
 <dt>名稱</dt><dd>逸東酒店（佐敦）</dd>
+<dt>地址</dt><dd>九龍彌敦道 380 號<br><span class="sub">380 Nathan Road, Jordan, Kowloon</span></dd>
 <dt>退房</dt><dd>12/10 12:00</dd>
 <dt>交通</dt><dd>佐敦站 B1 出口步行約 6–7 分鐘</dd>
-<dt>地址</dt><dd><span class="blank"></span></dd>
-<dt>訂房編號</dt><dd><span class="blank"></span></dd></dl>
-<div class="row"><a class="btn pri" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Eaton+HK+Jordan+Hong+Kong">🗺 開啟地圖</a></div></div>
+<dt>房號</dt><dd><input class="fld" data-f="room2" placeholder="填寫房號"></dd>
+<dt>訂房編號</dt><dd><input class="fld" data-f="bk2" placeholder="填寫訂房編號"></dd></dl>
+<div class="row"><a class="btn pri" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Eaton+HK+Jordan+Hong+Kong"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> 開啟地圖</a></div></div>
 <div class="card"><h2>旅遊資訊速查</h2><dl>
 <dt>報警／緊急</dt><dd><a class="ml" href="tel:999">999</a></dd>
-<dt>駐港辦事處</dt><dd>中華經貿協會 <span class="blank"></span></dd>
-<dt>保險資料</dt><dd><span class="blank"></span></dd>
+<dt>駐港辦事處</dt><dd>中華經貿協會<input class="fld" data-f="tw" placeholder="填寫聯絡電話"></dd>
+<dt>保險資料</dt><dd><input class="fld" data-f="ins" placeholder="填寫保險資料"></dd>
 <dt>貨幣</dt><dd>港幣（HKD），八達通可搭港鐵、巴士</dd></dl></div>
 
 <button class="btn back" data-go="menu">↑ 回主選單</button>
@@ -133,7 +145,9 @@ dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px}dt{color:va
 <script>
 const $=s=>document.querySelector(s);
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-const TABS=[["over","🏠","總覽"],["days","🗓","每日行程"],["list","✅","行前清單"],["stay","🏨","住宿速查"]];
+const SV=p=>`<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const IC={home:SV('<path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/>'),cal:SV('<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/>'),chk:SV('<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 12l3 3 5-6"/>'),bed:SV('<path d="M3 18V7M3 14h18v4M21 14v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11" r="1.5"/>'),pin:SV('<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),train:SV('<rect x="5" y="3" width="14" height="14" rx="4"/><path d="M5 11h14M9 21l2-4M15 21l-2-4"/><circle cx="9" cy="14" r=".6"/><circle cx="15" cy="14" r=".6"/>'),book:SV('<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>'),warn:SV('<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/>'),star:SV('<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>')};
+const TABS=[["over",IC.home,"總覽"],["days",IC.cal,"每日行程"],["list",IC.chk,"行前清單"],["stay",IC.bed,"住宿速查"]];
 const g=(k,t,n,h,d,q,tr,m)=>({k,t,n,h,d:d||[],q:q||n+" Hong Kong",tr,m});
 const DAYS=[
 {d:"12/8",w:"二",t:"機場 → 上環／中環 → 維港 → 迪士尼",lo:16,hi:21,alt:["中上環下雨：元創方、大館、ifc mall 可室內停留","維港夜景改在 ifc mall 四樓觀景"],
@@ -164,12 +178,16 @@ const DAYS=[
  g("shop","14:20","富莉餐飲用品公司","10:30–18:30",["想買黑白淡奶杯"],0,"走路 8 分鐘"),
  g("plain","14:30","逸東酒店拿行李","",[],"Eaton HK Jordan","搭車 52 分鐘"),
  g("plain","回程","香港國際機場","",["長榮 BR850 19:30 起飛；建議 16:30 前抵達辦理登機（建議值）"],"Hong Kong International Airport")]}];
+DAYS[0].brief="10:55 抵達 → 中上環咖啡、元創方、大館 → 20:30 香港站取行李 → 22:00 入住迪士尼探索家酒店";DAYS[0].notes=["大館八點結束營業（行程提醒），蘭芳園 18:00 關門，要趕時間","元創方 12:00 起營業；翻頁鐘需提前六個月預訂","行李在 20:30 前從香港站取回","酒店因減塑，牙刷、梳子可能要自備"];
+DAYS[1].brief="帶房卡紙套走賓客專用入口 → 迪士尼樂園 → 搭港鐵到佐敦入住逸東酒店 → 麥文記宵夜";DAYS[1].notes=["出門帶房卡紙套或入住證明","煙火與夜間表演以官方公告為準","離園到飯店約 33 分鐘車程（不含轉乘等候），另加步行","麥文記營業到 00:30"];
+DAYS[2].brief="09:00 出門 → 金華冰廳 → REstore → 倫敦大酒樓 → 曲奇四重奏 → Hashtag B → 富莉 → 14:30 取行李 → 機場，19:30 長榮 BR850 起飛";DAYS[2].notes=["倫敦大酒樓、REstore 的營業時間與行程時段不符，請先確認","退房時間 12:00，行李寄放後 14:30 取回","搭車到機場約 52 分鐘，預留辦理登機時間","黑白淡奶杯易碎，建議手提"];
 // 第 10 個參數 w 表示營業時間與行程時間可能衝突
 DAYS[2].it[2].w=1;DAYS[2].it[3].w=1;
 const CL={"行前待辦":["確認護照效期與入境規定","購買迪士尼門票並確認入園日期","準備八達通","eSIM 或漫遊","兌換港幣","12/9 出門帶房卡紙套（迪士尼酒店賓客入口）"],"行李準備":["護照","充電器","行動電源","薄外套","雨具"],"餐廳與訂位":["元創方翻頁鐘（需提前六個月預訂，確認是否購買）","倫敦大酒樓：確認營業時間與座位樓層","迪士尼園內餐廳（視需要訂位）"]};
 let day=0,rain=false,done=store.get("done",{}),list=store.get("list2",null)||Object.fromEntries(Object.entries(CL).map(([k,v])=>[k,v.map(t=>({t,c:0}))])),ex=store.get("ex",[]);
 const tag=(t,c)=>`<span class="tag ${c}">${t}</span>`;
-const maps=q=>`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+const MU={"兆成行 Hong Kong":"https://maps.app.goo.gl/1oxnEDYpp4vjw64JA","富莉餐飲用品公司 Hong Kong":"https://maps.app.goo.gl/ex3FA2UE6Gu6ctwa8"};
+const maps=q=>MU[q]||`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 function show(id){["over","days","list","stay"].forEach(x=>$("#p-"+x).hidden=x!==id);document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===id))}
 $("#tabs").innerHTML=TABS.map(t=>`<button role="tab" data-t="${t[0]}">${t[1]} ${t[2]}</button>`).join("");
 $("#tabs").onclick=e=>{const b=e.target.closest("button");if(b)show(b.dataset.t)};
@@ -178,14 +196,17 @@ const F=[["去程 12/8（二）","KHH","HKG","長榮 BR845","2026-12-08T09:15:00
 function dur(ms){const m=Math.floor(ms/6e4),d=Math.floor(m/1440),h=Math.floor(m%1440/60);return(d?d+" 天 ":"")+h+" 時 "+(m%60)+" 分"}
 function flights(){const n=Date.now();$("#flights").innerHTML=F.map(f=>{const a=Date.parse(f[4]),b=Date.parse(f[5]);const s=n<a?"距離起飛 "+dur(a-n):n<b?"飛行中（依時刻表）":"已抵達（依時刻表）";
 return`<div class="pass"><div class="l"><div class="sub" style="margin:0">${f[0]}</div><div class="route">${f[1]} → ${f[2]}</div><div>${f[3]}｜${f[6]}</div><div class="sub" style="margin:0">飛行約 ${f[7]}　航廈：以機場公告為準</div><div style="font-weight:700;color:var(--red)">${s}</div><a class="ml" target="_blank" rel="noopener" href="https://www.flightradar24.com/data/flights/${f[8]}">查看即時航班動態 ↗</a></div><div class="r"><b>登機證</b><span>BOARDING</span></div></div>`}).join("")}
-function count(){const s=new Date(2026,11,8),n=new Date(),t=new Date(n.getFullYear(),n.getMonth(),n.getDate()),df=Math.round((s-t)/864e5);
- $("#count").innerHTML=(df>0?`<div class="sub">距離出發還有</div><div class="big">${df} 天</div>`:df>-3?`<div class="sub">旅行進行中</div><div class="big">第 ${1-df} 天</div><div>${DAYS[-df].t}</div>`:`<div class="big">旅程結束</div>`)}
+function count(){const st=Date.parse("2026-12-08T09:15:00+08:00"),n=Date.now();let h;
+ if(n<st){const m=Math.floor((st-n)/6e4),d=Math.floor(m/1440),hh=Math.floor(m%1440/60),mm=m%60;h=`<div class="sub">距離出發（12/8 09:15 起飛）還有</div><div class="big">${d} 天 ${hh} 時 ${mm} 分</div>`}
+ else{let di=-1;try{const ds=new Date().toLocaleDateString("en-CA",{timeZone:"Asia/Hong_Kong"});di=Math.floor((Date.parse(ds+"T00:00:00+08:00")-Date.parse("2026-12-08T00:00:00+08:00"))/864e5)}catch(e){}
+  const x=DAYS[di];h=x?`<div style="text-align:left"><div class="sub" style="margin:0">今日 第 ${di+1} 天｜${x.d}（${x.w}）</div><h2 style="margin:0 0 6px">${x.t}</h2><p style="margin:0 0 8px">${x.brief}</p><div class="sub" style="margin:0"><b>注意事項</b></div><ul style="margin:4px 0 0;padding-left:20px">${x.notes.map(t=>`<li>${t}</li>`).join("")}</ul></div>`:`<div class="big">旅程結束</div><div class="sub">辛苦了，平安回家</div>`}
+ $("#count").innerHTML=h}
 function clock(){try{$("#hkt").textContent=new Date().toLocaleTimeString("zh-TW",{timeZone:"Asia/Hong_Kong",hour12:false,hour:"2-digit",minute:"2-digit"})}catch(e){}}
 function days(){$("#daybtns").innerHTML=DAYS.map((x,i)=>`<button data-i="${i}" aria-pressed="${i===day}"><b>${x.d}（${x.w}）</b><br>第 ${i+1} 天</button>`).join("");
  const x=DAYS[day];$("#sum").innerHTML=`<div><b>${x.t}</b></div><div id="wx">${wxh()}</div><div class="sub" style="margin:0">洋蔥式穿搭，室內冷氣偏冷。</div>`;
 
  $("#tl").innerHTML=x.it.map((o,j)=>{const id=`${day}-${j}`,last=j===x.it.length-1;
- return`<div class="it ${o.k}${done[id]?" done":""}" style="animation-delay:${j*60}ms"><div class="top"><input type="checkbox" data-id="${id}" ${done[id]?"checked":""} aria-label="完成"><div style="flex:1"><div class="time">${o.t}${o.m?tag("必去","must"):""}</div><h3>${o.n}</h3>${o.h?`<div class="sub" style="margin:0">營業：${o.h}${o.w?tag("營業時間與行程時段不符，出發前再確認","warn"):""}</div>`:""}${o.d.length?`<ul>${o.d.map(d=>`<li>${d}</li>`).join("")}</ul>`:""}${info(o)}<a class="ml" target="_blank" rel="noopener" href="${maps(o.q)}">🗺 查看地圖</a></div></div></div>${o.tr&&!last?`<div class="tr">🚇 ${o.tr}</div>`:last?"":`<div style="height:12px"></div>`}`}).join("")}
+ return`<div class="it ${o.k}${done[id]?" done":""}" style="animation-delay:${j*60}ms"><div class="top"><input type="checkbox" data-id="${id}" ${done[id]?"checked":""} aria-label="完成"><div style="flex:1"><div class="time">${o.t}<span class="tag cat">${cat(o)}</span>${o.m?tag("必去","must"):""}</div><h3>${o.n}</h3>${o.h?`<div class="sub" style="margin:0">營業：${o.h}${o.w?tag("營業時間與行程時段不符，出發前再確認","warn"):""}</div>`:""}${o.d.length?`<ul>${o.d.map(d=>`<li>${d}</li>`).join("")}</ul>`:""}${info(o)}<a class="ml" target="_blank" rel="noopener" href="${maps(o.q)}">${IC.pin} 查看地圖</a></div></div></div>${o.tr&&!last?`<div class="tr">${IC.train}<span>${o.tr}</span></div>`:last?"":`<div style="height:12px"></div>`}`}).join("")}
 $("#daybtns").onclick=e=>{const b=e.target.closest("button");if(b){day=+b.dataset.i;days()}};
 
 
@@ -202,7 +223,7 @@ const INFO={
 "香港國際機場":{i:"位於大嶼山赤鱲角，機場快線可直達市區。",n:"入境後先到行李轉盤；回程建議起飛前 2–3 小時抵達，留足安檢與出境時間。"},
 "港鐵香港站":{i:"機場快線與東涌線的市區站，連著國際金融中心（IFC）商場。",n:"出站走道指標多，請跟著 B 出口方向；寄放行李後再出發，逛街比較輕鬆。"},
 "Kactus Koffee":{i:"韓國咖啡品牌，上環店在皇后大道西 27 號。媒體介紹的招牌是冰咖啡上放手打微鹹奶霜的 Kactus Coffee。",n:"據介紹上環店要先找位子，再到一樓櫃檯點餐；招牌只有冰飲，天冷時請先確認有沒有熱飲。人均約 HK$50–60。",r:"Kactus Coffee（冰、鹹奶霜）、抹茶雲朵飲品"},
-"兆成行":{n:"我沒查到這間店的可靠資料，請出發前在地圖上確認品項與營業狀況。行程標示營業到 17:30，要留意時間。"},
+"兆成行":{n:"地圖已改成你提供的店家位置；品項與營業狀況請出發前再確認。行程標示營業到 17:30，要留意時間。"},
 "元創方 PMQ":{i:"由舊警察已婚宿舍活化而成的設計創意基地，有設計師小店、工作室與咖啡店。",n:"店家多半下午才開，你排的 15:30 剛好。翻頁鐘需提前六個月預訂，現場只能看看。",r:"逛設計師小店，挑小件伴手禮"},
 "Snack Baby Gelato & Drinks":{n:"12 月氣溫偏涼，你標註可去可不去；肚子不餓可直接跳過，節省時間給大館。"},
 "祥興記上海生煎包（中環）":{i:"中環的上海生煎包店，現煎、底部酥脆。",n:"內餡湯汁燙口，咬開前先小心；用餐時段可能排隊。",r:"招牌生煎包"},
@@ -220,11 +241,13 @@ const INFO={
 "曲奇四重奏（旺角店）":{i:"港式曲奇名店，四種口味混裝的曲奇鐵盒是常見伴手禮。",n:"熱門時段可能排隊；買完直接帶上飛機，別壓在行李底部。",r:"曲奇鐵盒伴手禮"},
 "Hashtag B":{n:"我沒查到這間店的可靠資料，請出發前在地圖上確認營業與品項。"},
 "富莉餐飲用品公司":{i:"餐飲用品店，你想買的是黑白淡奶杯。",n:"營業到 18:30，到店先確認有沒有貨；杯子易碎，建議手提並用衣物包好。"}};
-const info=o=>{const x=INFO[o.n];if(!x)return"";return`<details class="info"><summary>介紹・注意・推薦</summary>${x.i?`<p>📖 ${x.i}</p>`:""}${x.n?`<p>⚠️ ${x.n}</p>`:""}${x.r?`<p>👍 ${x.r}</p>`:""}</details>`};
+const cat=o=>({sight:"景點",food:"美食",shop:"購物"})[o.k]||(/酒店/.test(o.n)?"住宿":/機場|港鐵/.test(o.n)?"交通":/出門/.test(o.n)?"出發":"行程");
+const info=o=>{const x=INFO[o.n];if(!x)return"";return`<details class="info"><summary>介紹・注意・推薦</summary>${x.i?`<p class="ip">${IC.book}<span>${x.i}</span></p>`:""}${x.n?`<p class="ip">${IC.warn}<span>${x.n}</span></p>`:""}${x.r?`<p class="ip">${IC.star}<span>${x.r}</span></p>`:""}</details>`};
 let W=null;
 const WI=c=>c===0?"☀️":c<=3?"⛅":c<=48?"🌫":c<=82?"🌧":"⛈";
-function wxh(){const x=DAYS[day],w=W&&W[day];return w?`${WI(w.c)} ${w.lo}–${w.hi}°C｜降雨機率 ${w.p==null?"—":w.p+"%"}<span class="tag eg">即時預報</span>`:`☁️ 12 月氣候平均約 ${x.lo}–${x.hi}°C，偏乾燥<span class="tag eg">氣候平均</span>`}
+function wxh(){const x=DAYS[day],w=W&&W[day];return w?`${WI(w.c)} ${w.lo}–${w.hi}°C｜降雨機率 ${w.p==null?"—":w.p+"%"}<span class="tag eg">即時預報</span>`:`☁️ 12 月氣候平均約 ${x.lo}–${x.hi}°C，偏乾燥，降雨機率偏低（約 10–20%）<span class="tag eg">氣候平均</span>`}
 async function weather(){try{const c=new AbortController();setTimeout(()=>c.abort(),8000);const r=await fetch("https://api.open-meteo.com/v1/forecast?latitude=22.32&longitude=114.17&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FHong_Kong&start_date=2026-12-08&end_date=2026-12-10",{signal:c.signal});if(!r.ok)return;const j=(await r.json()).daily;W=j.time.map((_,i)=>({c:j.weather_code[i],hi:Math.round(j.temperature_2m_max[i]),lo:Math.round(j.temperature_2m_min[i]),p:j.precipitation_probability_max[i]}));$("#wx").innerHTML=wxh()}catch(e){}}
+document.querySelectorAll("[data-f]").forEach(i=>{i.value=store.get("f_"+i.dataset.f,"");i.oninput=()=>store.set("f_"+i.dataset.f,i.value)});
 count();flights();clock();days();lists();show("over");weather();
-setInterval(()=>{clock();flights();count()},30000);
+setInterval(()=>{clock();flights();count()},15000);
 </script></body></html>
