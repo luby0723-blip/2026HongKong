@@ -66,6 +66,8 @@ a.ml{display:inline-flex;align-items:center;gap:6px}
 .fld{font:inherit;border:1.5px solid var(--navy);border-radius:10px;padding:8px;background:var(--card);color:var(--ink);width:100%;min-width:0}
 .pay{margin-top:24px;background:#DDF1FC;border-color:#5BB3E6}.pay h2{color:#2A7DB5}.pay .btn{background:#89CFF0;border-color:#5BB3E6;color:#14344d}.tag.cat{color:var(--navy)}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]) .pay{background:#1f3a4d;border-color:#7cc4ec}:root:not([data-theme=light]) .pay h2{color:#9fd8ff}}
+.trow{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid rgba(35,64,107,.2)}.trow b{min-width:96px;flex:none}.trow.next{color:var(--red);font-weight:700}.trow.past{opacity:.5}
+.tag.live{background:var(--green);color:#fff;border-color:var(--green)}.tag.est{background:var(--yel);color:#1d2a3d;border-color:var(--yel)}
 .info{margin-top:8px;border-top:1px dashed var(--navy);padding-top:6px}.info summary{cursor:pointer;font-weight:700;color:var(--navy);min-height:32px}.info p{margin:6px 0}
 [hidden]{display:none!important}
 </style></head><body><main>
@@ -196,11 +198,18 @@ const F=[["去程 12/8（二）","KHH","HKG","長榮 BR845","2026-12-08T09:15:00
 function dur(ms){const m=Math.floor(ms/6e4),d=Math.floor(m/1440),h=Math.floor(m%1440/60);return(d?d+" 天 ":"")+h+" 時 "+(m%60)+" 分"}
 function flights(){const n=Date.now();$("#flights").innerHTML=F.map(f=>{const a=Date.parse(f[4]),b=Date.parse(f[5]);const s=n<a?"距離起飛 "+dur(a-n):n<b?"飛行中（依時刻表）":"已抵達（依時刻表）";
 return`<div class="pass"><div class="l"><div class="sub" style="margin:0">${f[0]}</div><div class="route">${f[1]} → ${f[2]}</div><div>${f[3]}｜${f[6]}</div><div class="sub" style="margin:0">飛行約 ${f[7]}　航廈：以機場公告為準</div><div style="font-weight:700;color:var(--red)">${s}</div><a class="ml" target="_blank" rel="noopener" href="https://www.flightradar24.com/data/flights/${f[8]}">查看即時航班動態 ↗</a></div><div class="r"><b>登機證</b><span>BOARDING</span></div></div>`}).join("")}
-function count(){const st=Date.parse("2026-12-08T09:15:00+08:00"),n=Date.now();let h;
+let todayOpen=true;
+function count(){const st=Date.parse("2026-12-08T09:15:00+08:00"),en=Date.parse("2026-12-10T21:05:00+08:00"),n=Date.now();let h;
  if(n<st){const m=Math.floor((st-n)/6e4),d=Math.floor(m/1440),hh=Math.floor(m%1440/60),mm=m%60;h=`<div class="sub">距離出發（12/8 09:15 起飛）還有</div><div class="big">${d} 天 ${hh} 時 ${mm} 分</div>`}
- else{let di=-1;try{const ds=new Date().toLocaleDateString("en-CA",{timeZone:"Asia/Hong_Kong"});di=Math.floor((Date.parse(ds+"T00:00:00+08:00")-Date.parse("2026-12-08T00:00:00+08:00"))/864e5)}catch(e){}
-  const x=DAYS[di];h=x?`<div style="text-align:left"><div class="sub" style="margin:0">今日 第 ${di+1} 天｜${x.d}（${x.w}）</div><h2 style="margin:0 0 6px">${x.t}</h2><p style="margin:0 0 8px">${x.brief}</p><div class="sub" style="margin:0"><b>注意事項</b></div><ul style="margin:4px 0 0;padding-left:20px">${x.notes.map(t=>`<li>${t}</li>`).join("")}</ul></div>`:`<div class="big">旅程結束</div><div class="sub">辛苦了，平安回家</div>`}
- $("#count").innerHTML=h}
+ else if(n>en){h=`<div class="big" style="color:var(--green)">歡迎回家</div><p style="margin:6px 0 0">旅程結束，辛苦了！記得整理照片，並在 LINE 完成記帳與分帳。</p>`}
+ else{let di=0;try{const ds=new Date().toLocaleDateString("en-CA",{timeZone:"Asia/Hong_Kong"});di=Math.floor((Date.parse(ds+"T00:00:00+08:00")-Date.parse("2026-12-08T00:00:00+08:00"))/864e5)}catch(e){}
+  di=Math.max(0,Math.min(2,di));const x=DAYS[di];
+  let hm="00:00";try{hm=new Date().toLocaleTimeString("en-GB",{timeZone:"Asia/Hong_Kong",hour12:false,hour:"2-digit",minute:"2-digit"})}catch(e){}
+  const nm=(+hm.slice(0,2)%24)*60+ +hm.slice(3,5),OV={"早上":480,"全天":540,"入住":1200,"宵夜":1320,"回程":930};
+  const ms=x.it.map(o=>{const m=/^(\d{1,2}):(\d{2})/.exec(o.t);return m?+m[1]*60+ +m[2]:(OV[o.t]??0)}),nx=ms.findIndex(v=>v>nm);
+  const rows=x.it.map((o,j)=>`<div class="trow${j===nx?" next":ms[j]<=nm?" past":""}"><b>${o.t}</b><span>${o.n}${j===nx?'<span class="tag must">下一個</span>':""}</span></div>`).join("");
+  h=`<details id="td" ${todayOpen?"open":""} style="text-align:left"><summary style="cursor:pointer;font-weight:700;color:var(--navy);min-height:32px">今日 第 ${di+1} 天｜${x.d}（${x.w}）每日摘要與注意事項</summary><h2 style="margin:8px 0 4px">${x.t}</h2><div style="margin:0 0 8px">${wxh(di)}</div><div class="sub" style="margin:0"><b>行程時間表</b></div>${rows}<div class="sub" style="margin:10px 0 0"><b>注意事項</b></div><ul style="margin:4px 0 0;padding-left:20px">${x.notes.map(t=>`<li>${t}</li>`).join("")}</ul></details>`}
+ $("#count").innerHTML=h;const t=$("#td");if(t)t.ontoggle=()=>{todayOpen=t.open}}
 function clock(){try{$("#hkt").textContent=new Date().toLocaleTimeString("zh-TW",{timeZone:"Asia/Hong_Kong",hour12:false,hour:"2-digit",minute:"2-digit"})}catch(e){}}
 function days(){$("#daybtns").innerHTML=DAYS.map((x,i)=>`<button data-i="${i}" aria-pressed="${i===day}"><b>${x.d}（${x.w}）</b><br>第 ${i+1} 天</button>`).join("");
  const x=DAYS[day];$("#sum").innerHTML=`<div><b>${x.t}</b></div><div id="wx">${wxh()}</div><div class="sub" style="margin:0">洋蔥式穿搭，室內冷氣偏冷。</div>`;
@@ -245,8 +254,8 @@ const cat=o=>({sight:"景點",food:"美食",shop:"購物"})[o.k]||(/酒店/.test
 const info=o=>{const x=INFO[o.n];if(!x)return"";return`<details class="info"><summary>介紹・注意・推薦</summary>${x.i?`<p class="ip">${IC.book}<span>${x.i}</span></p>`:""}${x.n?`<p class="ip">${IC.warn}<span>${x.n}</span></p>`:""}${x.r?`<p class="ip">${IC.star}<span>${x.r}</span></p>`:""}</details>`};
 let W=null;
 const WI=c=>c===0?"☀️":c<=3?"⛅":c<=48?"🌫":c<=82?"🌧":"⛈";
-function wxh(){const x=DAYS[day],w=W&&W[day];return w?`${WI(w.c)} ${w.lo}–${w.hi}°C｜降雨機率 ${w.p==null?"—":w.p+"%"}<span class="tag eg">即時預報</span>`:`☁️ 12 月氣候平均約 ${x.lo}–${x.hi}°C，偏乾燥，降雨機率偏低（約 10–20%）<span class="tag eg">氣候平均</span>`}
-async function weather(){try{const c=new AbortController();setTimeout(()=>c.abort(),8000);const r=await fetch("https://api.open-meteo.com/v1/forecast?latitude=22.32&longitude=114.17&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FHong_Kong&start_date=2026-12-08&end_date=2026-12-10",{signal:c.signal});if(!r.ok)return;const j=(await r.json()).daily;W=j.time.map((_,i)=>({c:j.weather_code[i],hi:Math.round(j.temperature_2m_max[i]),lo:Math.round(j.temperature_2m_min[i]),p:j.precipitation_probability_max[i]}));$("#wx").innerHTML=wxh()}catch(e){}}
+function wxh(i=day){const x=DAYS[i],w=W&&W[i];return w?`${WI(w.c)} ${w.lo}–${w.hi}°C<span class="tag live">即時</span>降雨機率 ${w.p==null?"—":w.p+"%"}`:`☁️ 約 ${x.lo}–${x.hi}°C<span class="tag est">預估</span>12 月氣候平均，偏乾燥，降雨機率偏低（約 10–20%）`}
+async function weather(){try{const c=new AbortController();setTimeout(()=>c.abort(),8000);const r=await fetch("https://api.open-meteo.com/v1/forecast?latitude=22.32&longitude=114.17&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FHong_Kong&start_date=2026-12-08&end_date=2026-12-10",{signal:c.signal});if(!r.ok)return;const j=(await r.json()).daily;W=j.time.map((_,i)=>({c:j.weather_code[i],hi:Math.round(j.temperature_2m_max[i]),lo:Math.round(j.temperature_2m_min[i]),p:j.precipitation_probability_max[i]}));$("#wx").innerHTML=wxh();count()}catch(e){}}
 document.querySelectorAll("[data-f]").forEach(i=>{i.value=store.get("f_"+i.dataset.f,"");i.oninput=()=>store.set("f_"+i.dataset.f,i.value)});
 count();flights();clock();days();lists();show("over");weather();
 setInterval(()=>{clock();flights();count()},15000);
