@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-Hant"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#23406B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%9A%8B%3C/text%3E%3C/svg%3E">
 <title>香港三天兩夜 · 旅行手帳</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
-:root{--navy:#23406B;--red:#D9482F;--yel:#F2B441;--pink:#E58FA6;--green:#2F7D6B;--sky:#7FB9D6;--bg:#EEF4F3;--card:#fff;--ink:#1d2a3d;--sightbg:#E3F1F8;--foodbg:#FDF1D4;--shopbg:#FBE4EA;--plainbg:#F4F5F6;--mut:#5b6b80;--sel:#23406B}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13211f;--card:#1c2b3a;--ink:#e8eef5;--sightbg:#1f3a4a;--foodbg:#4a3d1a;--shopbg:#4a2a35;--plainbg:#26333f;--mut:#a9b8c8;--navy:#8fb3e8;--sel:#3a5f94}}
+:root{--navy:#23406B;--red:#C23A22;--redbg:#C23A22;--yel:#F2B441;--pink:#E58FA6;--green:#2F7D6B;--sky:#7FB9D6;--bg:#EEF4F3;--card:#fff;--ink:#1d2a3d;--sightbg:#E3F1F8;--foodbg:#FDF1D4;--shopbg:#FBE4EA;--plainbg:#F4F5F6;--mut:#5b6b80;--sel:#23406B}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13211f;--card:#1c2b3a;--ink:#e8eef5;--sightbg:#1f3a4a;--foodbg:#4a3d1a;--shopbg:#4a2a35;--plainbg:#26333f;--mut:#a9b8c8;--navy:#8fb3e8;--sel:#3a5f94;--red:#FF8F78}}
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "Noto Sans TC",system-ui,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -13,8 +15,8 @@ main{max-width:640px;margin:0 auto;padding:12px}
 .card{background:var(--card);border:1.5px solid var(--navy);border-radius:16px;padding:14px;margin:0 0 12px}
 h1{margin:6px 0 2px;font-size:24px;color:var(--navy)}h2{font-size:19px;margin:0 0 8px;color:var(--navy)}h3{font-size:17px;margin:0}
 .sub{color:var(--mut);margin:0 0 8px}
-.tag{display:inline-block;font-size:13px;padding:0 8px;border-radius:99px;margin-left:6px;border:1px solid currentColor;vertical-align:middle;line-height:1.6}
-.warn{color:var(--red)}.eg{color:var(--green)}.must{background:var(--red);color:#fff;border-color:var(--red)}
+.tag{display:inline-block;font-size:14px;padding:0 8px;border-radius:99px;margin-left:6px;border:1px solid currentColor;vertical-align:middle;line-height:1.6}
+.warn{color:var(--red)}.eg{color:var(--green)}.must{background:var(--redbg);color:#fff;border-color:var(--redbg)}
 nav.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px}
 nav.tabs button{min-height:64px;border-radius:16px;border:1.5px solid var(--navy);background:var(--card);color:var(--ink);font:inherit;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}
 nav.tabs button[aria-selected=true]{background:var(--sel);color:#fff}
@@ -25,13 +27,10 @@ svg.hero{width:100%;height:auto;display:block;border-radius:12px;border:1.5px so
 .pass .l{flex:1;padding:10px}.pass .r{background:var(--sel);color:#fff;padding:10px;text-align:center;min-width:84px;display:flex;flex-direction:column;justify-content:center}
 .route{font-size:22px;font-weight:700}
 .days{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
-.days button{border:1.5px solid var(--navy);background:var(--card);color:var(--ink);border-radius:14px;padding:8px 4px;min-height:64px;font-size:15px;cursor:pointer}
+.days button{border:1.5px solid var(--navy);background:var(--card);color:var(--ink);border-radius:14px;padding:8px 4px;min-height:64px;font-size:16px;cursor:pointer}
 .days button[aria-pressed=true]{background:var(--sel);color:#fff}
 .sum{position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
 a.ml{color:var(--navy);font-weight:700}
-.seg{display:flex;gap:8px;margin:0 0 12px}
-.seg button{flex:1;min-height:44px;border-radius:12px;border:1.5px solid var(--navy);background:var(--card);color:var(--ink);font-size:16px;cursor:pointer}
-.seg button[aria-pressed=true]{background:var(--yel);color:#1d2a3d;font-weight:700}
 .it{border:1.5px solid var(--navy);border-radius:16px;padding:12px;margin:0;animation:pop .35s both}
 .it.sight{background:var(--sightbg)}.it.food{background:var(--foodbg)}.it.shop{background:var(--shopbg)}.it.plain{background:var(--plainbg)}
 .it.done h3{text-decoration:line-through;opacity:.6}
@@ -39,7 +38,7 @@ a.ml{color:var(--navy);font-weight:700}
 .top input{width:26px;height:26px;margin-top:2px;flex:none}
 .time{font-weight:700;color:var(--navy)}
 .it ul{margin:4px 0 0;padding-left:20px}
-.tr{margin:6px 0 6px 18px;padding:6px 10px;border-left:3px dotted var(--navy);color:var(--mut);font-size:15px}
+.tr{margin:6px 0 6px 18px;padding:6px 10px;border-left:3px dotted var(--navy);color:var(--mut);font-size:16px}
 .row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
 .row input{font:inherit;border:1.5px solid var(--navy);border-radius:10px;padding:8px;background:var(--card);color:var(--ink);min-width:0;flex:1}
 .btn{min-height:44px;border:1.5px solid var(--navy);background:var(--card);color:var(--ink);border-radius:12px;padding:0 14px;font-size:16px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
@@ -49,7 +48,6 @@ a.ml{color:var(--navy);font-weight:700}
 .ck{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(35,64,107,.2)}
 .ck input{width:24px;height:24px;flex:none}.ck span{flex:1}.ck button{border:0;background:none;font-size:20px;color:var(--red);min-width:44px;min-height:44px;cursor:pointer}
 dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px}dt{color:var(--mut)}dd{margin:0}
-.blank{border-bottom:1.5px dashed var(--mut);display:inline-block;min-width:120px}
 @keyframes pop{from{opacity:0;transform:translateY(10px) scale(.98)}60%{transform:translateY(-2px)}to{opacity:1;transform:none}}
 @keyframes tw{50%{opacity:.35}}@keyframes drift{to{transform:translateX(380px)}}@keyframes wv{50%{transform:translateX(8px)}}
 .tw{animation:tw 2.4s infinite}.tram{animation:drift 22s linear infinite}.wv{animation:wv 4s ease-in-out infinite}
@@ -68,6 +66,7 @@ a.ml{display:inline-flex;align-items:center;gap:6px}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]) .pay{background:#1f3a4d;border-color:#7cc4ec}:root:not([data-theme=light]) .pay h2{color:#9fd8ff}}
 .trow{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid rgba(35,64,107,.2)}.trow b{min-width:96px;flex:none}.trow.next{color:var(--red);font-weight:700}.trow.past{opacity:.5}
 .tag.live{background:var(--green);color:#fff;border-color:var(--green)}.tag.est{background:var(--yel);color:#1d2a3d;border-color:var(--yel)}
+.drv{font-size:26px;font-weight:700;line-height:1.45;margin:2px 0 0}
 .info{margin-top:8px;border-top:1px dashed var(--navy);padding-top:6px}.info summary{cursor:pointer;font-weight:700;color:var(--navy);min-height:32px}.info p{margin:6px 0}
 [hidden]{display:none!important}
 </style></head><body><main>
@@ -126,6 +125,7 @@ a.ml{display:inline-flex;align-items:center;gap:6px}
 <dt>退房</dt><dd>12/9 11:00</dd>
 <dt>房號</dt><dd><input class="fld" data-f="room1" placeholder="填寫房號"></dd>
 <dt>訂房編號</dt><dd><input class="fld" data-f="bk1" placeholder="填寫訂房編號"></dd></dl>
+<p class="sub" style="margin:10px 0 0">給司機看</p><p class="drv">迪士尼探索家度假酒店<br>香港迪士尼樂園度假區</p>
 <div class="row"><a class="btn pri" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Disney+Explorers+Lodge+Hong+Kong"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> 開啟地圖</a></div></div>
 <div class="card"><h2>12/9 住宿</h2><dl>
 <dt>名稱</dt><dd>逸東酒店（佐敦）</dd>
@@ -134,6 +134,7 @@ a.ml{display:inline-flex;align-items:center;gap:6px}
 <dt>交通</dt><dd>佐敦站 B1 出口步行約 6–7 分鐘</dd>
 <dt>房號</dt><dd><input class="fld" data-f="room2" placeholder="填寫房號"></dd>
 <dt>訂房編號</dt><dd><input class="fld" data-f="bk2" placeholder="填寫訂房編號"></dd></dl>
+<p class="sub" style="margin:10px 0 0">給司機看</p><p class="drv">逸東酒店<br>九龍彌敦道 380 號</p>
 <div class="row"><a class="btn pri" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Eaton+HK+Jordan+Hong+Kong"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> 開啟地圖</a></div></div>
 <div class="card"><h2>旅遊資訊速查</h2><dl>
 <dt>報警／緊急</dt><dd><a class="ml" href="tel:999">999</a></dd>
@@ -148,11 +149,11 @@ a.ml{display:inline-flex;align-items:center;gap:6px}
 const $=s=>document.querySelector(s);
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 const SV=p=>`<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
-const IC={home:SV('<path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/>'),cal:SV('<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/>'),chk:SV('<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 12l3 3 5-6"/>'),bed:SV('<path d="M3 18V7M3 14h18v4M21 14v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11" r="1.5"/>'),pin:SV('<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),train:SV('<rect x="5" y="3" width="14" height="14" rx="4"/><path d="M5 11h14M9 21l2-4M15 21l-2-4"/><circle cx="9" cy="14" r=".6"/><circle cx="15" cy="14" r=".6"/>'),book:SV('<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>'),warn:SV('<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/>'),star:SV('<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>')};
+const IC={home:SV('<path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/>'),cal:SV('<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/>'),chk:SV('<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 12l3 3 5-6"/>'),bed:SV('<path d="M3 18V7M3 14h18v4M21 14v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11" r="1.5"/>'),pin:SV('<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),train:SV('<rect x="5" y="3" width="14" height="14" rx="4"/><path d="M5 11h14M9 21l2-4M15 21l-2-4"/><circle cx="9" cy="14" r=".6"/><circle cx="15" cy="14" r=".6"/>'),book:SV('<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>'),warn:SV('<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/>'),star:SV('<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>'),nav:SV('<path d="M3 11l18-8-8 18-2-8z"/>')};
 const TABS=[["over",IC.home,"總覽"],["days",IC.cal,"每日行程"],["list",IC.chk,"行前清單"],["stay",IC.bed,"住宿速查"]];
 const g=(k,t,n,h,d,q,tr,m)=>({k,t,n,h,d:d||[],q:q||n+" Hong Kong",tr,m});
 const DAYS=[
-{d:"12/8",w:"二",t:"機場 → 上環／中環 → 維港 → 迪士尼",lo:16,hi:21,alt:["中上環下雨：元創方、大館、ifc mall 可室內停留","維港夜景改在 ifc mall 四樓觀景"],
+{d:"12/8",w:"二",t:"機場 → 上環／中環 → 維港 → 迪士尼",lo:16,hi:21,
  it:[g("plain","10:55–11:30","香港國際機場","",["長榮 BR845 10:55 抵達；入境、領行李"],"Hong Kong International Airport","搭乘機場快線 34 分鐘"),
  g("plain","12:10–12:40","港鐵香港站","",["G 樓層市區預辦登機大堂近 B 出口寄放行李"],"Hong Kong Station MTR","走路 9 分鐘至中環公車站；搭 55 號公車坐 2 站（約 4 分鐘），在「皇后大道西 62 號外」下車；再走 2 分鐘"),
  g("food","13:20–14:20","Kactus Koffee","08:00–22:00",[],"Kactus Koffee Hong Kong","走路 4 分鐘"),
@@ -162,15 +163,16 @@ const DAYS=[
  g("food","17:05–17:40","祥興記上海生煎包（中環）","09:00–21:00",[],0,"走路 1 分鐘"),
  g("food","17:40–17:50","蘭芳園（中環總店）","08:30–18:00",["推薦：絲襪奶茶，外帶喝！快快走！"],0,"走路 2 分鐘"),
  g("sight","17:50–18:20","大館","08:00–23:00",["原文提醒：八點就結束營業，要注意時間"],"Tai Kwun Hong Kong","走路大約 10 分鐘"),
+ g("food","18:30–19:40","晚餐／自由時間","",["原行程這段沒有安排，餐廳待確認"],"Central Hong Kong"),
  g("sight","19:50–20:20","維多利亞港","",["可順路去國際金融中心 ifc mall 四樓看（剛好在拿行李隔壁）","先看景色能否接受，不行再走去碼頭那邊看","留意頭頂黃色或藍色指示牌，找「港鐵/MTR」或「機場快線/東涌線」方向，再走去 B 號出口拿行李"],"ifc mall Hong Kong","",1),
  g("plain","20:30–20:50","港鐵香港站","",[],"Hong Kong Station MTR","香港站往東涌到欣澳站（23 分鐘）→ 轉迪士尼線到迪士尼站（6 分鐘），下車後可搭接駁車"),
  g("plain","22:00","迪士尼探索家度假酒店","",["房內提供基本洗沐用品與米奇造型拖鞋（可帶回家）","牙刷、梳子等一次性用品因減塑政策，可能需自備或另購","退房時間 11:00"],"Disney Explorers Lodge")]},
-{d:"12/9",w:"三",t:"迪士尼 → 佐敦逸東酒店",lo:16,hi:21,alt:["下雨：多安排園內室內表演與餐廳，備好雨具"],
+{d:"12/9",w:"三",t:"迪士尼 → 佐敦逸東酒店",lo:16,hi:21,
  it:[g("plain","早上","迪士尼探索家度假酒店","",["出門攜帶「飯店房卡紙套」（註明入住日期 12/8–12/9）或入住證明","通過樂園正門前的「迪士尼酒店賓客專用入口」時出示，即可排專用入口","到時可向櫃檯再確認一次","酒店大門外巴士站（1 號月台）搭接駁車到園區，約 5–8 分鐘"],"Disney Explorers Lodge"),
  g("sight","全日","香港迪士尼樂園","開園時間依官方公告",["行程備註：匙最愛的迪士尼"],"Hong Kong Disneyland","搭接駁車到迪士尼站 → 往欣澳到欣澳站（6 分）→ 往香港方向到荔景站（11 分）→ 往佐敦方向到佐敦站（16 分）→ B1 出口步行約 6 分鐘到飯店",1),
  g("plain","入住","逸東酒店","",["退房時間中午 12 點","拜託讓我去拍那些桌子！超級可愛！"],"Eaton HK Jordan","走路 7 分鐘"),
  g("food","宵夜","麥文記麵家","12:00–00:30",["吃宵夜～我覺得這一餐會特別好吃"],"麥文記麵家 Hong Kong")]},
-{d:"12/10",w:"四",t:"旺角／大角咀／油麻地 → 回家",lo:15,hi:20,alt:["下雨：多在店內停留，路程改搭車"],
+{d:"12/10",w:"四",t:"旺角／大角咀／油麻地 → 回家",lo:15,hi:20,
  it:[g("plain","10:00","從飯店出門","",[],"Eaton HK Jordan","搭車 18 分鐘"),
  g("food","10:30–11:30","金華冰廳","06:30–22:00",[],0,"走路 7 分鐘"),
  g("shop","11:45–12:30","REstore、黑地","12:00–21:00",[],0,"走路 6 分鐘",0,1),
@@ -181,12 +183,14 @@ const DAYS=[
  g("plain","15:30","逸東酒店拿行李","",[],"Eaton HK Jordan","搭車 52 分鐘"),
  g("plain","回程","香港國際機場","",["長榮 BR850 19:30 起飛；建議 16:30 前抵達辦理登機（建議值）"],"Hong Kong International Airport")]}];
 DAYS[0].brief="10:55 抵達 → 中上環咖啡、元創方、大館 → 20:30 香港站取行李 → 22:00 入住迪士尼探索家酒店";DAYS[0].notes=["大館八點結束營業（行程提醒），蘭芳園 18:00 關門，要趕時間","元創方 12:00 起營業；翻頁鐘需提前六個月預訂","行李在 20:30 前從香港站取回","酒店因減塑，牙刷、梳子可能要自備"];
-DAYS[1].brief="帶房卡紙套走賓客專用入口 → 迪士尼樂園 → 搭港鐵到佐敦入住逸東酒店 → 麥文記宵夜";DAYS[1].notes=["出門帶房卡紙套或入住證明","煙火與夜間表演以官方公告為準","離園到飯店約 33 分鐘車程（不含轉乘等候），另加步行","麥文記營業到 00:30"];
+DAYS[1].brief="帶房卡紙套走賓客專用入口 → 迪士尼樂園 → 搭港鐵到佐敦入住逸東酒店 → 麥文記宵夜";DAYS[1].notes=["出門帶房卡紙套或入住證明","11:00 退房，行李寄放方式待確認","煙火與夜間表演以官方公告為準","離園到飯店約 33 分鐘車程（不含轉乘等候），另加步行","麥文記營業到 00:30"];
 DAYS[2].brief="10:00 出門 → 金華冰廳 → REstore → 倫敦大酒樓 → 曲奇四重奏 → Hashtag B → 富莉 → 15:30 取行李 → 機場，19:30 長榮 BR850 起飛";DAYS[2].notes=["倫敦大酒樓營業時間與行程時段不符，請先確認；REstore 12:00 才開，11:45 到會早一點","退房時間 12:00，行李寄放後 15:30 取回","搭車到機場約 52 分鐘，預留辦理登機時間","黑白淡奶杯易碎，建議手提"];
-// 第 10 個參數 w 表示營業時間與行程時間可能衝突
-DAYS[2].it[3].w=1;
-const CL={"行前待辦":["確認護照效期與入境規定","購買迪士尼門票並確認入園日期","準備八達通","eSIM 或漫遊","兌換港幣","12/9 出門帶房卡紙套（迪士尼酒店賓客入口）"],"行李準備":["護照","充電器","行動電源","薄外套","雨具"],"餐廳與訂位":["元創方翻頁鐘（需提前六個月預訂，確認是否購買）","倫敦大酒樓：確認營業時間與座位樓層","迪士尼園內餐廳（視需要訂位）"]};
-let day=0,rain=false,done=store.get("done",{}),list=store.get("list2",null)||Object.fromEntries(Object.entries(CL).map(([k,v])=>[k,v.map(t=>({t,c:0}))])),ex=store.get("ex",[]);
+DAYS[0].it[9].tbc=1;DAYS[1].it[0].tbc=1;
+DAYS[1].it[0].d.unshift("11:00 退房；行李寄放的地點與方式待確認（入園前先處理好）");
+DAYS[2].it[0].d.push("出門前先辦理退房並寄放行李（退房時間 12:00），15:30 回來取");
+const CL={"行前待辦":["確認護照效期與入境規定","購買迪士尼門票並確認入園日期","準備八達通","eSIM 或漫遊","兌換港幣","12/9 出門帶房卡紙套（迪士尼酒店賓客入口）","長榮線上報到（BR845／BR850）","確認高雄機場報到時間","12/9 迪士尼酒店退房後的行李寄放方式"],"行李準備":["護照","充電器","行動電源","薄外套","雨具"],"餐廳與訂位":["元創方翻頁鐘（需提前六個月預訂，確認是否購買）","倫敦大酒樓：確認營業時間與座位樓層","迪士尼園內餐廳（視需要訂位）"]};
+let day=0,done=store.get("done",{}),list=store.get("list2",null)||Object.fromEntries(Object.entries(CL).map(([k,v])=>[k,v.map(t=>({t,c:0}))]));
+if(store.get("clv",1)<2){for(const t of ["長榮線上報到（BR845／BR850）","確認高雄機場報到時間","12/9 迪士尼酒店退房後的行李寄放方式"])if(list["行前待辦"]&&!list["行前待辦"].some(i=>i.t===t))list["行前待辦"].push({t,c:0});store.set("list2",list);store.set("clv",2)}
 const tag=(t,c)=>`<span class="tag ${c}">${t}</span>`;
 const MU={"兆成行 Hong Kong":"https://maps.app.goo.gl/1oxnEDYpp4vjw64JA","富莉餐飲用品公司 Hong Kong":"https://maps.app.goo.gl/ex3FA2UE6Gu6ctwa8"};
 const maps=q=>MU[q]||`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
@@ -211,15 +215,16 @@ function count(){const st=Date.parse("2026-12-08T09:15:00+08:00"),en=Date.parse(
   h=`<details id="td" ${todayOpen?"open":""} style="text-align:left"><summary style="cursor:pointer;font-weight:700;color:var(--navy);min-height:32px">今日 第 ${di+1} 天｜${x.d}（${x.w}）每日摘要與注意事項</summary><h2 style="margin:8px 0 4px">${x.t}</h2><div style="margin:0 0 8px">${wxh(di)}</div><div class="sub" style="margin:0"><b>行程時間表</b></div>${rows}<div class="sub" style="margin:10px 0 0"><b>注意事項</b></div><ul style="margin:4px 0 0;padding-left:20px">${x.notes.map(t=>`<li>${t}</li>`).join("")}</ul></details>`}
  $("#count").innerHTML=h;const t=$("#td");if(t)t.ontoggle=()=>{todayOpen=t.open}}
 function clock(){try{$("#hkt").textContent=new Date().toLocaleTimeString("zh-TW",{timeZone:"Asia/Hong_Kong",hour12:false,hour:"2-digit",minute:"2-digit"})}catch(e){}}
-function days(){$("#daybtns").innerHTML=DAYS.map((x,i)=>`<button data-i="${i}" aria-pressed="${i===day}"><b>${x.d}（${x.w}）</b><br>第 ${i+1} 天</button>`).join("");
+function dbtn(){$("#daybtns").innerHTML=DAYS.map((x,i)=>`<button data-i="${i}" aria-pressed="${i===day}"><b>${x.d}（${x.w}）</b><br>第 ${i+1} 天${i===tdy()?`<span class="tag live" style="margin-left:4px">今天</span>`:""}<br><span style="font-size:14px">${prog(i)}</span></button>`).join("")}
+function days(){dbtn();
  const x=DAYS[day];$("#sum").innerHTML=`<div><b>${x.t}</b></div><div id="wx">${wxh()}</div><div class="sub" style="margin:0">洋蔥式穿搭，室內冷氣偏冷。</div>`;
 
- $("#tl").innerHTML=x.it.map((o,j)=>{const id=`${day}-${j}`,last=j===x.it.length-1;
- return`<div class="it ${o.k}${done[id]?" done":""}" style="animation-delay:${j*60}ms"><div class="top"><input type="checkbox" data-id="${id}" ${done[id]?"checked":""} aria-label="完成"><div style="flex:1"><div class="time">${o.t}<span class="tag cat">${cat(o)}</span>${o.m?tag("必去","must"):""}</div><h3>${o.n}</h3>${o.h?`<div class="sub" style="margin:0">營業：${o.h}${o.w?tag("營業時間與行程時段不符，出發前再確認","warn"):""}</div>`:""}${o.d.length?`<ul>${o.d.map(d=>`<li>${d}</li>`).join("")}</ul>`:""}${info(o)}<a class="ml" target="_blank" rel="noopener" href="${maps(o.q)}">${IC.pin} 查看地圖</a></div></div></div>${o.tr&&!last?`<div class="tr">${IC.train}<span>${o.tr}</span></div>`:last?"":`<div style="height:12px"></div>`}`}).join("")}
-$("#daybtns").onclick=e=>{const b=e.target.closest("button");if(b){day=+b.dataset.i;days()}};
+ $("#tl").innerHTML=x.it.map((o,j)=>{const id=key(day,j),last=j===x.it.length-1;
+ return`<div class="it ${o.k}${done[id]?" done":""}" style="animation-delay:${j*60}ms"><div class="top"><input type="checkbox" data-id="${id}" ${done[id]?"checked":""} aria-label="完成"><div style="flex:1"><div class="time">${o.t}<span class="tag cat">${cat(o)}</span>${o.m?tag("必去","must"):""}</div><h3>${o.n}${o.tbc?tag("待確認","warn"):""}</h3>${o.h?`<div class="sub" style="margin:0">營業：${o.h}${oob(o)?tag("預計時間在營業時間外，請再確認","warn"):""}</div>`:""}${o.d.length?`<ul>${o.d.map(d=>`<li>${d}</li>`).join("")}</ul>`:""}${info(o)}<a class="ml" target="_blank" rel="noopener" href="${maps(o.q)}">${IC.pin} 查看地圖</a>${j>0?`<a class="ml" style="margin-left:14px" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(x.it[j-1].q)}&destination=${encodeURIComponent(o.q)}&travelmode=transit">${IC.nav} 導航</a>`:""}</div></div></div>${o.tr&&!last?`<div class="tr">${IC.train}<span>${o.tr}</span></div>`:last?"":`<div style="height:12px"></div>`}`}).join("")}
+$("#daybtns").onclick=e=>{const b=e.target.closest("button");if(b){day=+b.dataset.i;days();scrollTo({top:0})}};
 
 
-$("#tl").onchange=e=>{const i=e.target.dataset.id;if(i){done[i]=e.target.checked;store.set("done",done);e.target.closest(".it").classList.toggle("done",e.target.checked)}};
+$("#tl").onchange=e=>{const i=e.target.dataset.id;if(i){done[i]=e.target.checked;store.set("done",done);e.target.closest(".it").classList.toggle("done",e.target.checked);dbtn()}};
 
 
 
@@ -250,13 +255,20 @@ const INFO={
 "曲奇四重奏（旺角店）":{i:"港式曲奇名店，四種口味混裝的曲奇鐵盒是常見伴手禮。",n:"熱門時段可能排隊；買完直接帶上飛機，別壓在行李底部。",r:"曲奇鐵盒伴手禮"},
 "Hashtag B":{n:"我沒查到這間店的可靠資料，請出發前在地圖上確認營業與品項。"},
 "富莉餐飲用品公司":{i:"餐飲用品店，你想買的是黑白淡奶杯。",n:"營業到 18:30，到店先確認有沒有貨；杯子易碎，建議手提並用衣物包好。"}};
+const key=(i,j)=>{const o=DAYS[i].it[j];return i+"|"+o.n+"|"+DAYS[i].it.slice(0,j).filter(p=>p.n===o.n).length};
+const hkDay=()=>{try{const ds=new Date().toLocaleDateString("en-CA",{timeZone:"Asia/Hong_Kong"});return Math.floor((Date.parse(ds+"T00:00:00+08:00")-Date.parse("2026-12-08T00:00:00+08:00"))/864e5)}catch(e){return -1}};
+const tdy=()=>{const d=hkDay();return d>=0&&d<=2?d:-1};
+const prog=i=>DAYS[i].it.filter((o,j)=>done[key(i,j)]).length+"/"+DAYS[i].it.length+" 完成";
+const oob=o=>{const a=/(\d{1,2}):(\d{2})\s*[–-]\s*(\d{1,2}):(\d{2})/.exec(o.h||""),t=/^(\d{1,2}):(\d{2})(?:[–-](\d{1,2}):(\d{2}))?/.exec(o.t);if(!a||!t)return false;const m=(h,n)=>+h*60+ +n,op=m(a[1],a[2]);let cl=m(a[3],a[4]);if(cl<=op)cl+=1440;const st=m(t[1],t[2]);let en=t[3]?m(t[3],t[4]):st;if(en<st)en+=1440;return st<op||en>cl};
 const cat=o=>({sight:"景點",food:"美食",shop:"購物"})[o.k]||(/酒店/.test(o.n)?"住宿":/機場|港鐵/.test(o.n)?"交通":/出門/.test(o.n)?"出發":"行程");
 const info=o=>{const x=INFO[o.n];if(!x)return"";return`<details class="info"><summary>介紹・注意・推薦</summary>${x.i?`<p class="ip">${IC.book}<span>${x.i}</span></p>`:""}${x.n?`<p class="ip">${IC.warn}<span>${x.n}</span></p>`:""}${x.r?`<p class="ip">${IC.star}<span>${x.r}</span></p>`:""}</details>`};
 let W=null;
 const WI=c=>c===0?"☀️":c<=3?"⛅":c<=48?"🌫":c<=82?"🌧":"⛈";
 function wxh(i=day){const x=DAYS[i],w=W&&W[i];return w?`${WI(w.c)} ${w.lo}–${w.hi}°C<span class="tag live">即時</span>降雨機率 ${w.p==null?"—":w.p+"%"}`:`☁️ 約 ${x.lo}–${x.hi}°C<span class="tag est">預估</span>12 月氣候平均，偏乾燥，降雨機率偏低（約 10–20%）`}
-async function weather(){try{const c=new AbortController();setTimeout(()=>c.abort(),8000);const r=await fetch("https://api.open-meteo.com/v1/forecast?latitude=22.32&longitude=114.17&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FHong_Kong&start_date=2026-12-08&end_date=2026-12-10",{signal:c.signal});if(!r.ok)return;const j=(await r.json()).daily;W=j.time.map((_,i)=>({c:j.weather_code[i],hi:Math.round(j.temperature_2m_max[i]),lo:Math.round(j.temperature_2m_min[i]),p:j.precipitation_probability_max[i]}));$("#wx").innerHTML=wxh();count()}catch(e){}}
+async function weather(){try{const ds=["2026-12-08","2026-12-09","2026-12-10"],mx=new Date(Date.now()+8*36e5+15*864e5).toISOString().slice(0,10),ok=ds.filter(d=>d<=mx);if(!ok.length)return;const c=new AbortController();setTimeout(()=>c.abort(),8000);const r=await fetch("https://api.open-meteo.com/v1/forecast?latitude=22.32&longitude=114.17&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FHong_Kong&start_date="+ok[0]+"&end_date="+ok[ok.length-1],{signal:c.signal});if(!r.ok)return;const j=(await r.json()).daily,nw=[];j.time.forEach((d,i)=>{const k=ds.indexOf(d);if(k>=0)nw[k]={c:j.weather_code[i],hi:Math.round(j.temperature_2m_max[i]),lo:Math.round(j.temperature_2m_min[i]),p:j.precipitation_probability_max[i]}});W=nw;$("#wx").innerHTML=wxh();count()}catch(e){}}
 document.querySelectorAll("[data-f]").forEach(i=>{i.value=store.get("f_"+i.dataset.f,"");i.oninput=()=>store.set("f_"+i.dataset.f,i.value)});
-count();flights();clock();days();lists();show("over");weather();
+const T0=tdy();if(T0>=0)day=T0;
+count();flights();clock();days();lists();show(T0>=0?"days":"over");weather();
+setInterval(weather,18e5);document.addEventListener("visibilitychange",()=>{if(!document.hidden)weather()});
 setInterval(()=>{clock();flights();count()},15000);
 </script></body></html>
